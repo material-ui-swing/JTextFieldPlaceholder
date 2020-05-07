@@ -25,5 +25,5 @@ dependencies {
     implementation("com.google.guava:guava:28.1-jre")
 
     // Use JUnit test framework
-    testImplementation("junit:junit:4.12")
+    implementation(files("$projectDir/devlib/material-ui-swing-1.1.1-rc2.jar"))
 }
