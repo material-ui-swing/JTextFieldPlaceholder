@@ -1,13 +1,18 @@
 package io.vincenzopalazzo.placeholder;
 
+import io.swingsnackbar.SnackBar;
+import io.swingsnackbar.action.AbstractSnackBarAction;
 import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
 import mdlaf.MaterialLookAndFeel;
 import mdlaf.themes.JMarsDarkTheme;
 import mdlaf.utils.MaterialColors;
+import mdlaf.utils.MaterialFontFactory;
 import mdlaf.utils.MaterialImageFactory;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 
 public class DemoFrame extends JFrame {
 
@@ -19,6 +24,7 @@ public class DemoFrame extends JFrame {
         }
     }
 
+    private JFrame frame = this;
     private JPanel container;
     private JTextFieldPlaceholder textFieldPlaceholder;
 
@@ -35,14 +41,43 @@ public class DemoFrame extends JFrame {
 
     public void initComponent() {
         container = new JPanel();
+        //Init component
         textFieldPlaceholder = new JTextFieldPlaceholder();
+
+        //configure component
         textFieldPlaceholder.setIcon(MaterialImageFactory.getInstance().getImage(
                 GoogleMaterialDesignIcons.BOOKMARK,
                 MaterialColors.COSMO_DARK_GRAY
         ))
-        .setText("Lan/Lon")
-        .setVisible(true);
+                .setPlaceholderText("Lan/Lon")
+                .setVisible(true);
+
         container.add(textFieldPlaceholder);
+        JButton button = new JButton(MaterialImageFactory.getInstance().getImage(
+                GoogleMaterialDesignIcons.SEND,
+                MaterialColors.WHITE
+        ));
+
+        button.addActionListener(new AbstractAction() {
+            private SnackBar snackBar;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                snackBar = SnackBar.make(frame, "Lan/Lon: " + textFieldPlaceholder.getText(), "CLOSE")
+                        .setGap(80)
+                        .setIconTextStyle(MaterialFontFactory.getInstance().getFont(MaterialFontFactory.BOLD))
+                        .setIconTextColor(MaterialColors.COSMO_RED)
+                        .setDuration(SnackBar.LENGTH_LONG)
+                        .setAction(new AbstractSnackBarAction() {
+                            @Override
+                            public void mousePressed(MouseEvent e) {
+                                snackBar.dismiss();
+                            }
+                        })
+                        .run();
+            }
+        });
+
+        container.add(button);
     }
 
     public static void main(String[] args) {

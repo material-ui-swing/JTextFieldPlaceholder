@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package mdlaf.shadows;
+package io.vincenzopalazzo.placeholder;
 
 import mdlaf.utils.MaterialColors;
 
@@ -36,7 +36,7 @@ import java.util.Objects;
 /**
  * @author https://github.com/vincenzopalazzo
  */
-public class RoundedCornerBorder extends AbstractBorder {
+class RoundedCornerBorder extends AbstractBorder {
 
     protected  int arch = 12; //default value
     protected Color colorLine;

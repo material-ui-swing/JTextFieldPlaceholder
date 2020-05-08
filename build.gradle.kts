@@ -26,4 +26,5 @@ dependencies {
 
     // Use JUnit test framework
     implementation(files("$projectDir/devlib/material-ui-swing-1.1.1-rc2.jar"))
+    implementation(files("$projectDir/devlib/SwingSnackBar-0.0.1.jar"))
 }
