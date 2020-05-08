@@ -1,13 +1,13 @@
 # JTextFieldPlaceholder
 
-Custom component developer for JMars 5 application
+Custom component for JMars 5 application
 
 ## TODO
 This component has bad design, in the future should introduce the following effect
 
 - [ ] Used a personal UI component as BasicTextFieldPlaceholderUI
-- [ ] Introduce a ruled to check the error inside the text field and paint the line with an error color
-- [ ] Introduce a toggle button with an icon, inside the icon
+- [ ] Introduce rules to check the errors inside the text field and paint the line with an error color
+- [ ] Introduce a toggle button with an icon
 
 ## Actual effect
 
