@@ -42,14 +42,14 @@ public class DemoFrame extends JFrame {
     public void initComponent() {
         container = new JPanel();
         //Init component
-        textFieldPlaceholder = new JTextFieldPlaceholder();
+        textFieldPlaceholder = new JTextFieldPlaceholder(new JTextField("ALIBABA"));
 
         //configure component
         textFieldPlaceholder.setIcon(MaterialImageFactory.getInstance().getImage(
                 GoogleMaterialDesignIcons.BOOKMARK,
                 MaterialColors.COSMO_DARK_GRAY
-        ))
-                .setPlaceholderText("Lan/Lon")
+        )).setPlaceholderText("Lan/Lon")
+                .setPlaceholderTextColor(MaterialColors.COSMO_DARK_GRAY)
                 .setVisible(true);
 
         container.add(textFieldPlaceholder);

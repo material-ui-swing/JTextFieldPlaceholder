@@ -10,18 +10,23 @@ class CustomTextField extends JTextField {
     private JTextFieldPlaceholder textFieldPlaceholder;
 
     public CustomTextField(JTextFieldPlaceholder placeholder) {
-        setUI(new CustomTextFieldUI());
+        setUI(new CustomTextFieldUI(placeholder));
         this.textFieldPlaceholder = placeholder;
     }
 
     @Override
     public void updateUI() {
-        setUI(new CustomTextFieldUI());
+        setUI(new CustomTextFieldUI(textFieldPlaceholder));
     }
 
-    public class CustomTextFieldUI extends BasicTextFieldUI{
+    public static class CustomTextFieldUI extends BasicTextFieldUI{
 
         protected FocusListener focusListener = new LineFocusListener();
+        protected JTextFieldPlaceholder textFieldPlaceholder;
+
+        public CustomTextFieldUI(JTextFieldPlaceholder textFieldPlaceholder) {
+            this.textFieldPlaceholder = textFieldPlaceholder;
+        }
 
         @Override
         protected void installListeners() {

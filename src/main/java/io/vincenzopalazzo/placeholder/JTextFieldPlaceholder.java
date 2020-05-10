@@ -9,11 +9,20 @@ public class JTextFieldPlaceholder extends JPanel {
 
     protected JLabel iconContainer;
     protected JLabel placeholder;
-    protected CustomTextField textField;
+    protected JTextField textField;
     protected Color colorLine;
 
     public JTextFieldPlaceholder() {
         super(new FlowLayout());
+        this.textField = new CustomTextField(this);
+        initView();
+        initStyle();
+    }
+
+    public JTextFieldPlaceholder(JTextField textField) {
+        super(new FlowLayout());
+        this.textField = textField;
+        this.textField.setUI(new CustomTextField.CustomTextFieldUI(this));
         initView();
         initStyle();
     }
@@ -26,7 +35,6 @@ public class JTextFieldPlaceholder extends JPanel {
         placeholder.setBorder(BorderFactory.createEmptyBorder(0,0,0,2));
         this.add(placeholder);
 
-        textField = new CustomTextField(this);
         textField.setMinimumSize(new Dimension(50, 20));
         textField.setPreferredSize(new Dimension(95, 20));
         textField.setSize(new Dimension(95, 20));
@@ -58,9 +66,25 @@ public class JTextFieldPlaceholder extends JPanel {
         return this;
     }
 
+    public JTextFieldPlaceholder setPlaceholderTextColor(Color colorLine){
+        this.placeholder.setForeground(colorLine);
+        return this;
+    }
+
+    public JTextField getTextFiled(){
+        return this.textField;
+    }
+
     public JTextFieldPlaceholder setText(String text){
         if(text == null || text.isEmpty()) throw new IllegalArgumentException("Invalid text");
         this.textField.setText(text);
+        return this;
+    }
+
+    public JTextFieldPlaceholder setDimensionComponent(Dimension dimensionComponent){
+        textField.setMinimumSize(dimensionComponent);
+        textField.setPreferredSize(dimensionComponent);
+        textField.setSize(dimensionComponent);
         return this;
     }
 
@@ -85,7 +109,7 @@ public class JTextFieldPlaceholder extends JPanel {
             }
         }
         graphics.setColor(this.colorLine);
-        graphics.fillRect(iconContainer.getX(), this.getHeight() - this.getY(), this.getWidth() - iconContainer.getWidth(), 1);
+        graphics.fillRect(iconContainer.getX(), this.textField.getY()  + this.textField.getHeight() + 5, this.getWidth() - iconContainer.getWidth(), 1);
     }
 
     void doFocus(){
