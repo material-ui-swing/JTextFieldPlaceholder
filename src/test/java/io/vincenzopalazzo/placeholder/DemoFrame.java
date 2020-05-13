@@ -2,6 +2,7 @@ package io.vincenzopalazzo.placeholder;
 
 import io.swingsnackbar.SnackBar;
 import io.swingsnackbar.action.AbstractSnackBarAction;
+import io.vincenzopalazzo.placeholder.ui.BasicTextFieldPlaceholderUI;
 import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
 import mdlaf.MaterialLookAndFeel;
 import mdlaf.themes.JMarsDarkTheme;
@@ -18,6 +19,14 @@ public class DemoFrame extends JFrame {
 
     static {
         try {
+            UIManager.put("TextFieldPlaceholderUI", BasicTextFieldPlaceholderUI.class.getCanonicalName());
+            UIManager.put("TextFieldPlaceholder.placeholderColor", MaterialColors.COSMO_BLACK);
+            UIManager.put("TextFieldPlaceholder.background", MaterialColors.COSMO_LIGTH_GRAY);
+            UIManager.put("TextFieldPlaceholder.foreground", MaterialColors.BLACK);
+            UIManager.put("TextFieldPlaceholder[Line].activeColor", MaterialColors.COSMO_BLUE);
+            UIManager.put("TextFieldPlaceholder[Line].inactiveColor", MaterialColors.BLACK);
+            UIManager.put("TextFieldPlaceholder.caret", MaterialColors.BLACK);
+            UIManager.put("TextFieldPlaceholderUI", BasicTextFieldPlaceholderUI.class.getCanonicalName());
             UIManager.setLookAndFeel(new MaterialLookAndFeel(new JMarsDarkTheme()));
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
@@ -42,14 +51,18 @@ public class DemoFrame extends JFrame {
     public void initComponent() {
         container = new JPanel();
         //Init component
-        textFieldPlaceholder = new JTextFieldPlaceholder(new JTextField("ALIBABA"));
-
+        textFieldPlaceholder = new JTextFieldPlaceholder();
         //configure component
-        textFieldPlaceholder.setIcon(MaterialImageFactory.getInstance().getImage(
-                GoogleMaterialDesignIcons.BOOKMARK,
-                MaterialColors.COSMO_DARK_GRAY
-        )).setPlaceholderText("Lan/Lon")
-                .setPlaceholderTextColor(MaterialColors.COSMO_DARK_GRAY)
+        textFieldPlaceholder
+                .setIcon(MaterialImageFactory.getInstance().getImage(
+                        GoogleMaterialDesignIcons.STAR,
+                        MaterialColors.COSMO_BLACK
+                )).setSelectedIcon(
+                MaterialImageFactory.getInstance().getImage(
+                        GoogleMaterialDesignIcons.STAR,
+                        MaterialColors.YELLOW_800
+                )).setPlaceholderText("Username")
+                .setDimensionComponent(new Dimension(300, 15))
                 .setVisible(true);
 
         container.add(textFieldPlaceholder);
@@ -60,9 +73,10 @@ public class DemoFrame extends JFrame {
 
         button.addActionListener(new AbstractAction() {
             private SnackBar snackBar;
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                snackBar = SnackBar.make(frame, "Lan/Lon: " + textFieldPlaceholder.getText(), "CLOSE")
+                snackBar = SnackBar.make(frame, textFieldPlaceholder.getPlaceholderText() + " " + textFieldPlaceholder.getText(), "CLOSE")
                         .setGap(80)
                         .setIconTextStyle(MaterialFontFactory.getInstance().getFont(MaterialFontFactory.BOLD))
                         .setIconTextColor(MaterialColors.COSMO_RED)

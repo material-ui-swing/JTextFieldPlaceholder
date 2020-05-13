@@ -7,16 +7,22 @@ import java.awt.*;
 
 public class JTextFieldPlaceholder extends JPanel {
 
-    protected JLabel iconContainer;
+    private static final String uiClassID = "TextFieldPlaceholderUI";
+
+    //protected JLabel iconContainer;
+    protected JToggleButton iconContainer;
     protected JLabel placeholder;
+    protected JSeparator separator;
     protected JTextField textField;
     protected Color colorLine;
 
     public JTextFieldPlaceholder() {
-        super(new FlowLayout());
+        super();
+        super.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
         this.textField = new CustomTextField(this);
         initView();
         initStyle();
+        updateUI();
     }
 
     public JTextFieldPlaceholder(JTextField textField) {
@@ -25,19 +31,42 @@ public class JTextFieldPlaceholder extends JPanel {
         this.textField.setUI(new CustomTextField.CustomTextFieldUI(this));
         initView();
         initStyle();
+        updateUI();
+    }
+
+    //@Override
+   public String getUIClassID() {
+       return uiClassID;
     }
 
     protected void initView(){
-        iconContainer = new JLabel();
+        //iconContainer = new JLabel();
+        iconContainer = new JToggleButton();
+        iconContainer.setOpaque(false);
         this.add(iconContainer);
 
         placeholder = new JLabel();
         placeholder.setBorder(BorderFactory.createEmptyBorder(0,0,0,2));
         this.add(placeholder);
 
-        textField.setMinimumSize(new Dimension(50, 20));
-        textField.setPreferredSize(new Dimension(95, 20));
-        textField.setSize(new Dimension(95, 20));
+        separator = new JSeparator(JSeparator.VERTICAL);
+
+        Dimension dimensionTextField = new Dimension(100, 25);
+        System.out.println(dimensionTextField);
+        textField.setMinimumSize(dimensionTextField);
+        textField.setPreferredSize(dimensionTextField);
+        textField.setSize(dimensionTextField);
+
+        int heightString = placeholder.getFontMetrics(placeholder.getFont()).getHeight() - 5;
+
+        super.add(Box.createHorizontalStrut(3));
+        //separator.setForeground(placeholder.getForeground());
+        //separator.setBackground(this.textField.getBackground());
+        separator.setPreferredSize(new Dimension(2, heightString));
+        separator.setSize(new Dimension(2, heightString));
+        separator.setMaximumSize(new Dimension(2, heightString));
+        super.add(separator);
+        super.add(Box.createHorizontalStrut(10));
         super.add(textField);
 
         textField.setBorder(BorderFactory.createEmptyBorder());
@@ -57,6 +86,12 @@ public class JTextFieldPlaceholder extends JPanel {
     public JTextFieldPlaceholder setIcon(Icon icon){
         if(icon == null) throw new IllegalArgumentException("icon null");
         iconContainer.setIcon(icon);
+        return this;
+    }
+
+    public JTextFieldPlaceholder setSelectedIcon(Icon icon){
+        if(icon == null) throw new IllegalArgumentException("icon null");
+        iconContainer.setSelectedIcon(icon);
         return this;
     }
 
@@ -82,7 +117,6 @@ public class JTextFieldPlaceholder extends JPanel {
     }
 
     public JTextFieldPlaceholder setDimensionComponent(Dimension dimensionComponent){
-        textField.setMinimumSize(dimensionComponent);
         textField.setPreferredSize(dimensionComponent);
         textField.setSize(dimensionComponent);
         return this;
@@ -103,24 +137,35 @@ public class JTextFieldPlaceholder extends JPanel {
     protected void paintLine(Graphics graphics){
         if(colorLine == null){
             if(textField.isFocusOwner()){
-                this.colorLine = UIManager.getColor("TextField[Line].activeColor");;
+                this.colorLine = UIManager.getColor("TextFieldPlaceholder[Line].activeColor");;
             }else{
-                this.colorLine = UIManager.getColor("TextField[Line].inactiveColor");
+                this.colorLine = UIManager.getColor("TextFieldPlaceholder[Line].inactiveColor");
             }
         }
         graphics.setColor(this.colorLine);
-        graphics.fillRect(iconContainer.getX(), this.textField.getY()  + this.textField.getHeight() + 5, this.getWidth() - iconContainer.getWidth(), 1);
+        graphics.fillRect(super.getRootPane().getX() + 5, this.textField.getY()  + this.textField.getHeight() + 1, this.getWidth() - 8, 1);
     }
 
     void doFocus(){
-        this.colorLine = UIManager.getColor("TextField[Line].activeColor");
+        this.colorLine = UIManager.getColor("TextFieldPlaceholder[Line].activeColor");
         this.repaint();
     }
 
     void focusLose(){
-        this.colorLine = UIManager.getColor("TextField[Line].inactiveColor");
+        this.colorLine = UIManager.getColor("TextFieldPlaceholder[Line].inactiveColor");
         this.repaint();
     }
 
+    //getter and setter
+    public JToggleButton getIconContainer() {
+        return iconContainer;
+    }
 
+    public JLabel getPlaceholderComponent() {
+        return placeholder;
+    }
+
+    public JSeparator getSeparator() {
+        return separator;
+    }
 }

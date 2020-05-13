@@ -12,6 +12,7 @@ class CustomTextField extends JTextField {
     public CustomTextField(JTextFieldPlaceholder placeholder) {
         setUI(new CustomTextFieldUI(placeholder));
         this.textFieldPlaceholder = placeholder;
+        updateUI();
     }
 
     @Override
@@ -19,13 +20,28 @@ class CustomTextField extends JTextField {
         setUI(new CustomTextFieldUI(textFieldPlaceholder));
     }
 
-    public static class CustomTextFieldUI extends BasicTextFieldUI{
+    public static class CustomTextFieldUI extends BasicTextFieldUI {
 
         protected FocusListener focusListener = new LineFocusListener();
         protected JTextFieldPlaceholder textFieldPlaceholder;
 
         public CustomTextFieldUI(JTextFieldPlaceholder textFieldPlaceholder) {
             this.textFieldPlaceholder = textFieldPlaceholder;
+        }
+
+        @Override
+        public void installUI(JComponent c) {
+            super.installUI(c);
+
+            JTextField textField = (JTextField) c;
+            c.setBackground(UIManager.getColor("TextFieldPlaceholder.background"));
+            c.setForeground(UIManager.getColor("TextFieldPlaceholder.foreground"));
+            textField.setCaretColor(UIManager.getColor("TextFieldPlaceholder.caret"));
+        }
+
+        @Override
+        protected void installDefaults() {
+            super.installDefaults();
         }
 
         @Override
