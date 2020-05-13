@@ -5,7 +5,7 @@ Custom component for JMars 5 application
 ## TODO
 This component has bad design, in the future should introduce the following effect
 
-- [ ] Used a personal UI component as BasicTextFieldPlaceholderUI
+- [X] Used a personal UI component as BasicTextFieldPlaceholderUI
 - [ ] Introduce rules to check the errors inside the text field and paint the line with an error color
 - [ ] Introduce a toggle button with an icon
 
@@ -17,8 +17,7 @@ This component has bad design, in the future should introduce the following effe
 
 ## Dependency
 
-This component has a dependence from [Material-ui-swing](https://github.com/vincenzopalazzo/material-ui-swing)
-
+This component has a dependence from [Material-ui-swing](https://github.com/vincenzopalazzo/material-ui-swing) (only for the moment)
 ## Author
 
 This component is developer by [@vincenzopalazzo](https://github.com/vincenzopalazzo)
