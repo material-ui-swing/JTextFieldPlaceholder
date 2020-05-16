@@ -7,6 +7,7 @@ import io.vincenzopalazzo.placeholder.util.RoundedCornerBorder;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class JTextFieldPlaceholder extends JPanel {
 
@@ -16,12 +17,10 @@ public class JTextFieldPlaceholder extends JPanel {
     protected JLabel placeholder;
     protected JSeparator separator;
     protected JTextField textField;
-    protected Color colorLine;
     protected boolean passwordField;
 
     public JTextFieldPlaceholder() {
         super();
-        super.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
         this.textField = new JTextField();
         initView();
         initStyle();
@@ -29,62 +28,11 @@ public class JTextFieldPlaceholder extends JPanel {
     }
 
     public JTextFieldPlaceholder(JTextField textField) {
-        super(new FlowLayout());
+        super();
         this.textField = textField;
         passwordField = (textField instanceof JPasswordField);
         initView();
-        initStyle();
         updateUI();
-    }
-
-    @Override
-    public String getUIClassID() {
-        return uiClassID;
-    }
-
-    protected void initView() {
-        //iconContainer = new JLabel();
-        iconContainer = new JToggleButton();
-        iconContainer.setOpaque(false);
-        this.add(iconContainer);
-
-        placeholder = new JLabel();
-        placeholder.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 2));
-        this.add(placeholder);
-
-        separator = new JSeparator(JSeparator.VERTICAL);
-
-        Dimension dimensionTextField = new Dimension(100, 25);
-        System.out.println(dimensionTextField);
-        textField.setMinimumSize(dimensionTextField);
-        textField.setPreferredSize(dimensionTextField);
-        textField.setSize(dimensionTextField);
-
-        int heightString = placeholder.getFontMetrics(placeholder.getFont()).getHeight() - 5;
-
-        super.add(Box.createHorizontalStrut(3));
-        //separator.setForeground(placeholder.getForeground());
-        //separator.setBackground(this.textField.getBackground());
-        separator.setPreferredSize(new Dimension(2, heightString));
-        separator.setSize(new Dimension(2, heightString));
-        separator.setMaximumSize(new Dimension(2, heightString));
-        super.add(separator);
-        super.add(Box.createHorizontalStrut(10));
-        super.add(textField);
-
-        textField.setBorder(BorderFactory.createEmptyBorder());
-        setMaximumSize(new Dimension(textField.getWidth() + 250, textField.getHeight() + 15));
-        setBorder(new RoundedCornerBorder(getBackground(), 6));
-    }
-
-    protected void initStyle() {
-        setBackground(textField.getBackground());
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        this.paintLine(g);
     }
 
     @Override
@@ -97,6 +45,79 @@ public class JTextFieldPlaceholder extends JPanel {
             setUI(ui);
         }
         this.setCorrectTextFieldUI();
+    }
+
+    @Override
+    public String getUIClassID() {
+        return uiClassID;
+    }
+
+    protected void initView() {
+        this.initComponent();
+        this.initStyle();
+        this.initLayout();
+    }
+
+    protected void initStyle() {
+        setBackground(textField.getBackground());
+
+        setBorder(new RoundedCornerBorder(getBackground(), 7));
+
+        int height = this.placeholder.getFontMetrics(this.placeholder.getFont()).getHeight();
+        separator.setPreferredSize(new Dimension(2, height));
+        separator.setSize(new Dimension(2, height));
+        separator.setMaximumSize(new Dimension(2, height));
+
+        this.iconContainer.setFocusable(false);
+        this.placeholder.setFocusable(false);
+    }
+
+    protected void initComponent() {
+        iconContainer = new JToggleButton();
+        iconContainer.setOpaque(false);
+
+        placeholder = new JLabel();
+        placeholder.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 2));
+
+        separator = new JSeparator(JSeparator.VERTICAL);
+    }
+
+    protected void initLayout() {
+        GroupLayout groupLayout = new GroupLayout(this);
+        this.setLayout(groupLayout);
+
+        groupLayout.setHorizontalGroup(
+                groupLayout.createSequentialGroup()
+                        .addComponent(this.iconContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addGap(10)
+                        .addComponent(this.placeholder, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addGap(10)
+                        .addComponent(this.separator, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addGap(2)
+                        .addComponent(this.textField, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+        );
+
+        groupLayout.setVerticalGroup(
+                groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER, true)
+                        .addComponent(this.iconContainer)
+                        .addComponent(this.placeholder, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(this.separator)
+                        .addComponent(this.textField, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+        );
+    }
+
+    /**
+     *
+     * @param dimensionComponent
+     * @return JtextFieldPlaceholder component
+     *
+     * @deprecated This method will be removed in the version 0.1.0
+     */
+    @Deprecated
+    public JTextFieldPlaceholder setDimensionComponent(Dimension dimensionComponent) {
+        textField.setPreferredSize(dimensionComponent);
+        textField.setSize(dimensionComponent);
+        return this;
     }
 
     public JTextFieldPlaceholder setIcon(Icon icon) {
@@ -132,9 +153,19 @@ public class JTextFieldPlaceholder extends JPanel {
         return this;
     }
 
-    public JTextFieldPlaceholder setDimensionComponent(Dimension dimensionComponent) {
-        textField.setPreferredSize(dimensionComponent);
-        textField.setSize(dimensionComponent);
+    public JTextFieldPlaceholder setDimension(int wight, int height){
+        Dimension dimension = new Dimension(wight, height);
+        super.setPreferredSize(dimension);
+        int newWight = wight - this.iconContainer.getWidth() - this.placeholder.getWidth();
+        Dimension textFieldDimension = new Dimension(newWight, height - 5);
+        this.textField.setPreferredSize(textFieldDimension);
+        this.initStyle();
+        return this;
+    }
+
+    public JTextFieldPlaceholder addAction(ActionListener action){
+        if(action == null) throw new IllegalArgumentException("Action not valid");
+        this.iconContainer.addActionListener(action);
         return this;
     }
 
@@ -148,28 +179,6 @@ public class JTextFieldPlaceholder extends JPanel {
 
     public Icon getIcon() {
         return this.iconContainer.getIcon();
-    }
-
-    protected void paintLine(Graphics graphics) {
-        if (colorLine == null) {
-            if (textField.isFocusOwner()) {
-                this.colorLine = UIManager.getColor("TextFieldPlaceholder[Line].activeColor");
-            } else {
-                this.colorLine = UIManager.getColor("TextFieldPlaceholder[Line].inactiveColor");
-            }
-        }
-        graphics.setColor(this.colorLine);
-        graphics.fillRect(super.getRootPane().getX() + 5, this.textField.getY() + this.textField.getHeight() + 1, this.getWidth() - 8, 1);
-    }
-
-    public void doFocus() {
-        this.colorLine = UIManager.getColor("TextFieldPlaceholder[Line].activeColor");
-        this.repaint();
-    }
-
-    public void focusLose() {
-        this.colorLine = UIManager.getColor("TextFieldPlaceholder[Line].inactiveColor");
-        this.repaint();
     }
 
     //getter and setter

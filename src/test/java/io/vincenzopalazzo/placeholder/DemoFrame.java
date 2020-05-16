@@ -62,7 +62,7 @@ public class DemoFrame extends JFrame {
                         GoogleMaterialDesignIcons.STAR,
                         MaterialColors.YELLOW_800
                 )).setPlaceholderText("Username")
-                .setDimensionComponent(new Dimension(300, 15))
+                .setDimension(350, 25)
                 .setVisible(true);
 
         container.add(textFieldPlaceholder);

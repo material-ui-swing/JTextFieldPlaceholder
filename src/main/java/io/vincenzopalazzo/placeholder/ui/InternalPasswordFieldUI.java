@@ -44,16 +44,16 @@ public class InternalPasswordFieldUI extends BasicPasswordFieldUI {
         this.getComponent().removeFocusListener(focusListener);
     }
 
-    public class LineFocusListener implements FocusListener {
+    public class LineFocusListener implements FocusListener{
 
         @Override
         public void focusGained(FocusEvent e) {
-            textFieldPlaceholder.doFocus();
+            textFieldPlaceholder.repaint();
         }
 
         @Override
         public void focusLost(FocusEvent e) {
-            textFieldPlaceholder.focusLose();
+            textFieldPlaceholder.repaint();
         }
     }
 }

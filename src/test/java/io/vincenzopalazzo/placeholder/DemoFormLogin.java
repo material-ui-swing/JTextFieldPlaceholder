@@ -9,8 +9,7 @@ import mdlaf.utils.MaterialImageFactory;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
 
 public class DemoFormLogin extends JFrame {
 
@@ -67,8 +66,7 @@ public class DemoFormLogin extends JFrame {
                                 MaterialColors.LIGHT_BLUE_400
                         )
                 )
-                .setDimensionComponent(new Dimension(180, 25))
-                .setBackground(MaterialColors.COSMO_LIGTH_GRAY);
+                .setDimension(150, 35);
 
         form.add(Box.createVerticalStrut(35));
         form.add(usernameForm);
@@ -86,58 +84,35 @@ public class DemoFormLogin extends JFrame {
                                 MaterialColors.LIGHT_BLUE_400
                         )
                 )
-                .setDimensionComponent(new Dimension(180, 25))
-                .setBackground(MaterialColors.COSMO_LIGTH_GRAY);
+                .setDimension(150, 35)
+                .addAction(new AbstractAction() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        JPasswordField passwordField = (JPasswordField) passwordFieldForm.getTextFiled();
+                        if (!passwordFieldForm.isSelected()) {
+                            passwordField.setEchoChar((char) UIManager.get("PasswordField.echoChar"));
+                        } else {
+                            passwordField.setEchoChar((char) 0);
+                        }
+                    }
+                });
 
 
         form.add(passwordFieldForm);
         form.add(Box.createVerticalStrut(25));
 
         this.submitForm = new JButton("LOGIN");
-
         super.setContentPane(containerForm);
     }
 
     void initAction() {
         this.submitForm.addActionListener((e ->
-                SnackBar.make(this, "Login fail", "CLOSE")
-                        .setIconTextColor(MaterialColors.COSMO_RED)
-                        .setSnackBarForeground(MaterialColors.WHITE)
-                        .run()
+                        SnackBar.make(this, "Login fail", "CLOSE")
+                                .setIconTextColor(MaterialColors.COSMO_RED)
+                                .setSnackBarForeground(MaterialColors.WHITE)
+                                .run()
                 )
         );
-
-        this.passwordFieldForm.getIconContainer().addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                JPasswordField passwordField = (JPasswordField) passwordFieldForm.getTextFiled();
-                if (!passwordFieldForm.isSelected()) {
-                    passwordField.setEchoChar((char) UIManager.get("PasswordField.echoChar"));
-                } else {
-                    passwordField.setEchoChar((char) 0);
-                }
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
     }
 
     void initLayout() {

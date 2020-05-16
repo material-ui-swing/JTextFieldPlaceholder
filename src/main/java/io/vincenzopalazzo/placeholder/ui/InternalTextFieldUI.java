@@ -47,12 +47,12 @@ public class InternalTextFieldUI extends BasicTextFieldUI {
 
         @Override
         public void focusGained(FocusEvent e) {
-            textFieldPlaceholder.doFocus();
+            textFieldPlaceholder.repaint();
         }
 
         @Override
         public void focusLost(FocusEvent e) {
-            textFieldPlaceholder.focusLose();
+            textFieldPlaceholder.repaint();
         }
     }
 }
