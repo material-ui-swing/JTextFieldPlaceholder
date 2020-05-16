@@ -20,7 +20,8 @@ This component has bad design, in the future should introduce the following effe
 ## Example with code
 
 ```java
-this.passwordFieldForm.setPlaceholderText("Password")
+JTextFieldPlaceholder passwordFieldForm = new JTextFieldPlaceholder(new JPasswordField());
+passwordFieldForm.setPlaceholderText("Password")
                 .setIcon(
                         MaterialImageFactory.getInstance().getImage(
                                 GoogleMaterialDesignIcons.VISIBILITY_OFF
