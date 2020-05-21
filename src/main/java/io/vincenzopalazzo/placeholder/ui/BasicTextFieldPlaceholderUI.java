@@ -144,7 +144,7 @@ public class BasicTextFieldPlaceholderUI extends BasicPanelUI {
             colorLine = this.colorUnfocusLine;
         }
         graphics.setColor(colorLine);
-        graphics.fillRect(this.textFieldPlaceholder.getRootPane().getX() + 5, this.textField.getY() + this.textField.getHeight() + 1, this.textFieldPlaceholder.getWidth() - 8, 1);
+        graphics.fillRect(this.textFieldPlaceholder.getRootPane().getX() + 5, this.textField.getY() + this.textField.getHeight() + 1, this.textFieldPlaceholder.getWidth() - 5, 1);
     }
     //getter
     public String getPrefix() {

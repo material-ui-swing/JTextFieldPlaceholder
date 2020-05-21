@@ -19,14 +19,12 @@ public class DemoFrame extends JFrame {
 
     static {
         try {
-            UIManager.put("TextFieldPlaceholderUI", BasicTextFieldPlaceholderUI.class.getCanonicalName());
             UIManager.put("TextFieldPlaceholder.placeholderColor", MaterialColors.COSMO_BLACK);
             UIManager.put("TextFieldPlaceholder.background", MaterialColors.COSMO_LIGTH_GRAY);
             UIManager.put("TextFieldPlaceholder.foreground", MaterialColors.BLACK);
             UIManager.put("TextFieldPlaceholder[Line].activeColor", MaterialColors.COSMO_BLUE);
             UIManager.put("TextFieldPlaceholder[Line].inactiveColor", MaterialColors.BLACK);
             UIManager.put("TextFieldPlaceholder.caret", MaterialColors.BLACK);
-            UIManager.put("TextFieldPlaceholderUI", BasicTextFieldPlaceholderUI.class.getCanonicalName());
             UIManager.setLookAndFeel(new MaterialLookAndFeel(new JMarsDarkTheme()));
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
@@ -54,6 +52,7 @@ public class DemoFrame extends JFrame {
         textFieldPlaceholder = new JTextFieldPlaceholder();
         //configure component
         textFieldPlaceholder
+                .setPlaceholderText("Username")
                 .setIcon(MaterialImageFactory.getInstance().getImage(
                         GoogleMaterialDesignIcons.STAR,
                         MaterialColors.COSMO_BLACK
@@ -61,9 +60,8 @@ public class DemoFrame extends JFrame {
                 MaterialImageFactory.getInstance().getImage(
                         GoogleMaterialDesignIcons.STAR,
                         MaterialColors.YELLOW_800
-                )).setPlaceholderText("Username")
-                .setDimension(350, 25)
-                .setVisible(true);
+                ))
+        .setDimension(350, 45);
 
         container.add(textFieldPlaceholder);
         JButton button = new JButton(MaterialImageFactory.getInstance().getImage(

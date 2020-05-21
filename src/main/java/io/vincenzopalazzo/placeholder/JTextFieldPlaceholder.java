@@ -22,8 +22,8 @@ public class JTextFieldPlaceholder extends JPanel {
     public JTextFieldPlaceholder() {
         super();
         this.textField = new JTextField();
+        this.passwordField = false;
         initView();
-        initStyle();
         updateUI();
     }
 
@@ -63,7 +63,7 @@ public class JTextFieldPlaceholder extends JPanel {
 
         setBorder(new RoundedCornerBorder(getBackground(), 7));
 
-        int height = this.placeholder.getFontMetrics(this.placeholder.getFont()).getHeight();
+        int height = this.placeholder.getFontMetrics(this.placeholder.getFont()).getHeight() - 5;
         separator.setPreferredSize(new Dimension(2, height));
         separator.setSize(new Dimension(2, height));
         separator.setMaximumSize(new Dimension(2, height));
@@ -157,7 +157,7 @@ public class JTextFieldPlaceholder extends JPanel {
         Dimension dimension = new Dimension(wight, height);
         super.setPreferredSize(dimension);
         int newWight = wight - this.iconContainer.getWidth() - this.placeholder.getWidth();
-        Dimension textFieldDimension = new Dimension(newWight, height - 5);
+        Dimension textFieldDimension = new Dimension(newWight, height - 10);
         this.textField.setPreferredSize(textFieldDimension);
         this.initStyle();
         return this;
