@@ -18,6 +18,9 @@ public class JTextFieldPlaceholder extends JPanel {
     protected JSeparator separator;
     protected JTextField textField;
     protected boolean passwordField;
+    protected int gapIconToPlaceholder;
+    protected int gapSeparatorToPlaceholder;
+    protected int gapTextToSeparator;
 
     public JTextFieldPlaceholder() {
         super();
@@ -89,11 +92,11 @@ public class JTextFieldPlaceholder extends JPanel {
         groupLayout.setHorizontalGroup(
                 groupLayout.createSequentialGroup()
                         .addComponent(this.iconContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(10)
+                        .addGap(this.gapIconToPlaceholder)
                         .addComponent(this.placeholder, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(10)
+                        .addGap(this.gapSeparatorToPlaceholder)
                         .addComponent(this.separator, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(2)
+                        .addGap(this.gapTextToSeparator)
                         .addComponent(this.textField, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
         );
 
@@ -132,10 +135,26 @@ public class JTextFieldPlaceholder extends JPanel {
         return this;
     }
 
+    public JTextFieldPlaceholder setDisabledIcon(Icon icon) {
+        if (icon == null) throw new IllegalArgumentException("icon null");
+        iconContainer.setDisabledIcon(icon);
+        return this;
+    }
+
     public JTextFieldPlaceholder setPlaceholderText(String text) {
         if (text == null || text.isEmpty()) throw new IllegalArgumentException("Invalid text");
         placeholder.setText(text);
         return this;
+    }
+
+    public void setEnabled(boolean value){
+        this.textField.setEnabled(value);
+        this.iconContainer.setEnabled(value);
+        this.repaint();
+    }
+
+    public boolean isEnabled(){
+        return textField.isEnabled();
     }
 
     public JTextFieldPlaceholder setPlaceholderTextColor(Color colorLine) {
@@ -192,6 +211,33 @@ public class JTextFieldPlaceholder extends JPanel {
 
     public JSeparator getSeparator() {
         return separator;
+    }
+
+    public int getGapIconToPlaceholder() {
+        return gapIconToPlaceholder;
+    }
+
+    public JTextFieldPlaceholder setGapIconToPlaceholder(int gapIconToPlaceholder) {
+        this.gapIconToPlaceholder = gapIconToPlaceholder;
+        return this;
+    }
+
+    public int getGapSeparatorToPlaceholder() {
+        return gapSeparatorToPlaceholder;
+    }
+
+    public JTextFieldPlaceholder setGapSeparatorToPlaceholder(int gapSeparatorToPlaceholder) {
+        this.gapSeparatorToPlaceholder = gapSeparatorToPlaceholder;
+        return this;
+    }
+
+    public int getGapTextToSeparator() {
+        return gapTextToSeparator;
+    }
+
+    public JTextFieldPlaceholder setGapTextToSeparator(int gapTextToSeparator) {
+        this.gapTextToSeparator = gapTextToSeparator;
+        return this;
     }
 
     protected void setCorrectTextFieldUI() {

@@ -20,10 +20,15 @@ public class BasicTextFieldPlaceholderUI extends BasicPanelUI {
 
     protected Color background;
     protected Color foreground;
+    protected Color disabledBackground;
+    protected Color disabledForeground;
     protected Color colorFocusLine;
     protected Color colorUnfocusLine;
+    protected Color separatorColor;
+    protected Color placeholderColor;
     protected JTextFieldPlaceholder textFieldPlaceholder;
     protected JTextField textField;
+    protected JLabel placeholder;
     protected TextFieldPlaceholderFocusListener focusListener;
 
     @SuppressWarnings({"MethodOverridesStaticMethodOfSuperclass", "UnusedDeclaration"})
@@ -53,14 +58,19 @@ public class BasicTextFieldPlaceholderUI extends BasicPanelUI {
             iconContainer.setBackground(this.background);
         }
 
-        JLabel placeholder = textFieldPlaceholder.getPlaceholderComponent();
+        this.placeholder = textFieldPlaceholder.getPlaceholderComponent();
         if (placeholder != null) {
-            Color placeholderColor = UIManager.getColor(this.getPrefix().concat(".placeholderColor"));
-            placeholderColor = placeholderColor == null ? Color.DARK_GRAY : placeholderColor;
             placeholder.setOpaque(false);
-            placeholder.setForeground(placeholderColor);
+            placeholder.setForeground(this.placeholderColor);
             placeholder.setBackground(this.background);
         }
+        int gapIconToPlaceholder = UIManager.getInt(this.getPrefix() + ".gapIconToPlaceholder") == 0 ? 10 : UIManager.getInt(this.getPrefix() + ".gapIconToPlaceholder");
+        this.textFieldPlaceholder.setGapIconToPlaceholder(gapIconToPlaceholder);
+        int gapSeparatorToPlaceholder = UIManager.getInt(this.getPrefix() + ".gapSeparatorToPlaceholder") == 0 ? 10 : UIManager.getInt(this.getPrefix() + ".gapSeparatorToPlaceholder");
+        this.textFieldPlaceholder.setGapSeparatorToPlaceholder(gapSeparatorToPlaceholder);
+        int gapTextToSeparator = UIManager.getInt(this.getPrefix() + ".gapTextToSeparator") == 0 ? 10 : UIManager.getInt(this.getPrefix() + ".gapTextToSeparator");
+        this.textFieldPlaceholder.setGapTextToSeparator(gapTextToSeparator);
+
 /*
         if(textField != null){
             textField = textFieldPlaceholder.getTextFiled();
@@ -74,8 +84,12 @@ public class BasicTextFieldPlaceholderUI extends BasicPanelUI {
         if(separator != null){
 
             separator.setBackground(this.background);
-            separator.setForeground(this.foreground);
+            separator.setForeground(this.separatorColor);
         }
+        Color tmp = UIManager.getColor(this.getPrefix() + ".disabledBackground");
+        this.disabledBackground = tmp == null ? Color.CYAN : tmp;
+        tmp = UIManager.getColor(this.getPrefix() + ".disabledForeground");
+        this.disabledForeground = tmp == null ? Color.CYAN : tmp;
 
         this.installListener();
     }
@@ -95,12 +109,25 @@ public class BasicTextFieldPlaceholderUI extends BasicPanelUI {
         this.background = p.getBackground();
         this.foreground = p.getForeground();
         this.colorFocusLine = UIManager.getColor(this.getPrefix() + "[Line].activeColor") == null ? Color.CYAN : this.colorFocusLine;
-        this.colorUnfocusLine = UIManager.getColor(this.getPrefix() + "[Line].inactiveColore") == null ? Color.GRAY : this.colorUnfocusLine;
+        this.colorUnfocusLine = UIManager.getColor(this.getPrefix() + "[Line].inactiveColor") == null ? Color.GRAY : this.colorUnfocusLine;
+        Color color = UIManager.getColor(this.getPrefix().concat(".placeholderColor"));
+        this.placeholderColor = color == null ? Color.DARK_GRAY : color;
+        this.separatorColor = UIManager.getColor(this.getPrefix() + ".separatorColor") == null ? this.placeholderColor
+                : UIManager.getColor(this.getPrefix() + ".separatorColor");
+
     }
 
     @Override
     public void paint(Graphics g, JComponent c) {
-        super.paint(g, c);
+        if(!this.textField.isEnabled()){
+            this.textFieldPlaceholder.setBackground(this.disabledBackground);
+            this.placeholder.setBackground(this.disabledBackground);
+            this.placeholder.setForeground(this.disabledForeground);
+            return;
+        }
+        this.textFieldPlaceholder.setBackground(this.background);
+        this.placeholder.setBackground(this.background);
+        this.placeholder.setForeground(this.foreground);
         this.paintLine(g);
     }
 

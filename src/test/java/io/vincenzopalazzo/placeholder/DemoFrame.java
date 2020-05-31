@@ -2,7 +2,6 @@ package io.vincenzopalazzo.placeholder;
 
 import io.swingsnackbar.SnackBar;
 import io.swingsnackbar.action.AbstractSnackBarAction;
-import io.vincenzopalazzo.placeholder.ui.BasicTextFieldPlaceholderUI;
 import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
 import mdlaf.MaterialLookAndFeel;
 import mdlaf.themes.JMarsDarkTheme;
@@ -25,6 +24,17 @@ public class DemoFrame extends JFrame {
             UIManager.put("TextFieldPlaceholder[Line].activeColor", MaterialColors.COSMO_BLUE);
             UIManager.put("TextFieldPlaceholder[Line].inactiveColor", MaterialColors.BLACK);
             UIManager.put("TextFieldPlaceholder.caret", MaterialColors.BLACK);
+
+            UIManager.put("TextFieldPlaceholder.disabledBackground", MaterialColors.COSMO_DARK_GRAY);
+            UIManager.put("TextFieldPlaceholder.disabledForeground",  MaterialColors.GRAY_700);
+            UIManager.put("TextFieldPlaceholder.inactiveForeground", MaterialColors.COSMO_LIGTH_GRAY);
+            UIManager.put("TextFieldPlaceholder.inactiveBackground", MaterialColors.BLACK);
+            UIManager.put("TextFieldPlaceholder.selectionBackground", MaterialColors.LIGHT_BLUE_400);
+            UIManager.put("TextFieldPlaceholder.selectionForeground", MaterialColors.BLACK);
+            //UIManager.put("TextFieldPlaceholder.separatorColor", MaterialColors.PINK_700);
+            //UIManager.put("TextFieldPlaceholder.gapIconToPlaceholder", 10);
+            //UIManager.put("TextFieldPlaceholder.gapSeparatorToPlaceholder", 10);
+            //UIManager.put("TextFieldPlaceholder.gapTextToSeparator", 10);
             UIManager.setLookAndFeel(new MaterialLookAndFeel(new JMarsDarkTheme()));
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
@@ -37,7 +47,8 @@ public class DemoFrame extends JFrame {
 
     public void initView() {
         initComponent();
-
+        textFieldPlaceholder.setText("DISABLED");
+        textFieldPlaceholder.setEnabled(false);
         super.setContentPane(container);
         super.setSize(new Dimension(400, 400));
         super.setTitle("New Swing component from @vincenzopalazzo");
@@ -61,6 +72,11 @@ public class DemoFrame extends JFrame {
                         GoogleMaterialDesignIcons.STAR,
                         MaterialColors.YELLOW_800
                 ))
+                .setDisabledIcon(
+                        MaterialImageFactory.getInstance().getImage(
+                                GoogleMaterialDesignIcons.STAR,
+                                MaterialColors.GRAY_700
+                        ))
         .setDimension(350, 45);
 
         container.add(textFieldPlaceholder);
@@ -74,6 +90,7 @@ public class DemoFrame extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                textFieldPlaceholder.setEnabled(!textFieldPlaceholder.isEnabled());
                 snackBar = SnackBar.make(frame, textFieldPlaceholder.getPlaceholderText() + " " + textFieldPlaceholder.getText(), "CLOSE")
                         .setGap(80)
                         .setIconTextStyle(MaterialFontFactory.getInstance().getFont(MaterialFontFactory.BOLD))
