@@ -119,7 +119,9 @@ public class JTextFieldPlaceholder extends JPanel {
     @Deprecated
     public JTextFieldPlaceholder setDimensionComponent(Dimension dimensionComponent) {
         textField.setPreferredSize(dimensionComponent);
+        this.setPreferredSize(new Dimension(dimensionComponent.width, dimensionComponent.height + 10));
         textField.setSize(dimensionComponent);
+        this.setSize(new Dimension(dimensionComponent.width, dimensionComponent.height + 10));
         return this;
     }
 

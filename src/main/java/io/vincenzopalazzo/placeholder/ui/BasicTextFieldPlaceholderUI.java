@@ -170,8 +170,12 @@ public class BasicTextFieldPlaceholderUI extends BasicPanelUI {
         }else{
             colorLine = this.colorUnfocusLine;
         }
+        JRootPane rootPane = this.textFieldPlaceholder.getRootPane();
+        System.out.println(textFieldPlaceholder.getHeight());
+        int margin =  this.textFieldPlaceholder.getHeight() - this.textField.getHeight();
+        System.out.println(margin);
         graphics.setColor(colorLine);
-        graphics.fillRect(this.textFieldPlaceholder.getRootPane().getX() + 5, this.textField.getY() + this.textField.getHeight() + 1, this.textFieldPlaceholder.getWidth() - 5, 1);
+        graphics.fillRect(rootPane.getX() + 5, this.textField.getY() + this.textFieldPlaceholder.getHeight() - margin + 2, this.textFieldPlaceholder.getWidth() - 5, 1);
     }
     //getter
     public String getPrefix() {
