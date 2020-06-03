@@ -91,21 +91,24 @@ public class JTextFieldPlaceholder extends JPanel {
 
         groupLayout.setHorizontalGroup(
                 groupLayout.createSequentialGroup()
-                        .addComponent(this.iconContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(this.iconContainer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE)
                         .addGap(this.gapIconToPlaceholder)
-                        .addComponent(this.placeholder, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(this.placeholder, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE)
                         .addGap(this.gapSeparatorToPlaceholder)
-                        .addComponent(this.separator, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(this.separator, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE)
                         .addGap(this.gapTextToSeparator)
-                        .addComponent(this.textField, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(this.textField, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE)
         );
 
         groupLayout.setVerticalGroup(
                 groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER, true)
                         .addComponent(this.iconContainer)
-                        .addComponent(this.placeholder, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(this.placeholder, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE)
                         .addComponent(this.separator)
-                        .addComponent(this.textField, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addGroup(
+                                groupLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                                        .addComponent(this.textField, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE)
+                        )
         );
     }
 
@@ -176,11 +179,12 @@ public class JTextFieldPlaceholder extends JPanel {
 
     public JTextFieldPlaceholder setDimension(int wight, int height){
         Dimension dimension = new Dimension(wight, height);
-        super.setPreferredSize(dimension);
-        int newWight = wight - this.iconContainer.getWidth() - this.placeholder.getWidth();
-        Dimension textFieldDimension = new Dimension(newWight, height - 10);
-        this.textField.setPreferredSize(textFieldDimension);
-        this.initStyle();
+        super.setMaximumSize(dimension);
+        return this;
+    }
+
+    public JTextFieldPlaceholder setDimension(Dimension dimension){
+        super.setMaximumSize(dimension);
         return this;
     }
 

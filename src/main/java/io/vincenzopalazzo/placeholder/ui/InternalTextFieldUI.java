@@ -70,10 +70,10 @@ public class InternalTextFieldUI extends BasicTextFieldUI {
         this.getComponent().removeFocusListener(focusListener);
     }
 
-    /*@Override //TODO i lose some event
+    @Override //TODO i lose some event
     protected String getPropertyPrefix() {
         return "TextFieldPlaceholder";
-    }*/
+    }
 
     public class LineFocusListener implements FocusListener{
 

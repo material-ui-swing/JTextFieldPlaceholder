@@ -175,7 +175,7 @@ public class BasicTextFieldPlaceholderUI extends BasicPanelUI {
         int margin =  this.textFieldPlaceholder.getHeight() - this.textField.getHeight();
         System.out.println(margin);
         graphics.setColor(colorLine);
-        graphics.fillRect(rootPane.getX() + 5, this.textField.getY() + this.textFieldPlaceholder.getHeight() - margin + 2, this.textFieldPlaceholder.getWidth() - 5, 1);
+        graphics.fillRect(rootPane.getX(), this.textField.getY() + this.textField.getHeight(), this.textFieldPlaceholder.getWidth() - 5, 1);
     }
     //getter
     public String getPrefix() {
