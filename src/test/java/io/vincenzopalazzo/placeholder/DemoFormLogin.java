@@ -53,7 +53,7 @@ public class DemoFormLogin extends JFrame {
         form.setBackground(MaterialColors.COSMO_STRONG_GRAY);
         form.setBorder(new RoundedCornerBorder(MaterialColors.COSMO_STRONG_GRAY, 15));
 
-        this.usernameForm = new JTextFieldPlaceholder(new JTextField());
+        this.usernameForm = new JTextFieldPlaceholder(new JTextField(12));
 
         this.usernameForm.setPlaceholderText("Username")
                 .setIcon(
@@ -66,7 +66,7 @@ public class DemoFormLogin extends JFrame {
                                 MaterialColors.LIGHT_BLUE_400
                         )
                 )
-                .setDimension(150, 35);
+                .setDimension(250, 35);
 
         form.add(Box.createVerticalStrut(35));
         form.add(usernameForm);

@@ -3,57 +3,26 @@ package io.vincenzopalazzo.placeholder.ui;
 import io.vincenzopalazzo.placeholder.JTextFieldPlaceholder;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicPasswordFieldUI;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import javax.swing.text.Element;
+import javax.swing.text.PasswordView;
+import javax.swing.text.View;
 
-public class InternalPasswordFieldUI extends BasicPasswordFieldUI {
-
-
-    protected FocusListener focusListener = new LineFocusListener();
-    protected JTextFieldPlaceholder textFieldPlaceholder;
+public class InternalPasswordFieldUI extends InternalTextFieldUI {
 
     public InternalPasswordFieldUI(JTextFieldPlaceholder textFieldPlaceholder) {
-        this.textFieldPlaceholder = textFieldPlaceholder;
+        super(textFieldPlaceholder);
     }
 
     @Override
     public void installUI(JComponent c) {
         super.installUI(c);
-
-        JTextField textField = (JTextField) c;
-        c.setBackground(UIManager.getColor("TextFieldPlaceholder.background"));
-        c.setForeground(UIManager.getColor("TextFieldPlaceholder.foreground"));
-        textField.setCaretColor(UIManager.getColor("TextFieldPlaceholder.caret"));
-    }
-
-    @Override
-    protected void installDefaults() {
-        super.installDefaults();
-    }
-
-    @Override
-    protected void installListeners() {
-        super.installListeners();
-        this.getComponent().addFocusListener(focusListener);
-    }
-
-    @Override
-    protected void uninstallListeners() {
-        super.uninstallListeners();
-        this.getComponent().removeFocusListener(focusListener);
-    }
-
-    public class LineFocusListener implements FocusListener{
-
-        @Override
-        public void focusGained(FocusEvent e) {
-            textFieldPlaceholder.repaint();
+        Character echoChar = (Character)UIManager.getDefaults().get( "PasswordField.echoChar");
+        if(echoChar != null) {
+            LookAndFeel.installProperty(getComponent(), "echoChar", echoChar);
         }
+    }
 
-        @Override
-        public void focusLost(FocusEvent e) {
-            textFieldPlaceholder.repaint();
-        }
+    public View create(Element elem) {
+        return new PasswordView(elem);
     }
 }

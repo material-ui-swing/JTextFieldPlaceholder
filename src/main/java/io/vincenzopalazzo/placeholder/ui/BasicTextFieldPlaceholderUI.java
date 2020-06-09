@@ -7,6 +7,7 @@ import io.vincenzopalazzo.placeholder.util.ComponentUtil;
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicPanelUI;
+import javax.swing.plaf.synth.SynthEditorPaneUI;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
@@ -170,12 +171,8 @@ public class BasicTextFieldPlaceholderUI extends BasicPanelUI {
         }else{
             colorLine = this.colorUnfocusLine;
         }
-        JRootPane rootPane = this.textFieldPlaceholder.getRootPane();
-        System.out.println(textFieldPlaceholder.getHeight());
-        int margin =  this.textFieldPlaceholder.getHeight() - this.textField.getHeight();
-        System.out.println(margin);
         graphics.setColor(colorLine);
-        graphics.fillRect(rootPane.getX(), this.textField.getY() + this.textField.getHeight(), this.textFieldPlaceholder.getWidth() - 5, 1);
+        graphics.fillRect(0, textFieldPlaceholder.getHeight() - 3, this.textFieldPlaceholder.getWidth() - 5, 1);
     }
     //getter
     public String getPrefix() {

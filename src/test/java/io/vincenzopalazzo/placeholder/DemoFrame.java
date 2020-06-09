@@ -24,17 +24,18 @@ public class DemoFrame extends JFrame {
             UIManager.put("TextFieldPlaceholder[Line].activeColor", MaterialColors.COSMO_BLUE);
             UIManager.put("TextFieldPlaceholder[Line].inactiveColor", MaterialColors.BLACK);
             UIManager.put("TextFieldPlaceholder.caret", MaterialColors.BLACK);
+            UIManager.put("TextFieldPlaceholder.separatorColor", MaterialColors.PINK_700);
+            //UIManager.put("TextFieldPlaceholder.gapIconToPlaceholder", 10);
+            //UIManager.put("TextFieldPlaceholder.gapSeparatorToPlaceholder", 10);
+            //UIManager.put("TextFieldPlaceholder.gapTextToSeparator", 10);
 
+            //TODO implement this
             UIManager.put("TextFieldPlaceholder.disabledBackground", MaterialColors.COSMO_DARK_GRAY);
             UIManager.put("TextFieldPlaceholder.disabledForeground",  MaterialColors.GRAY_700);
             UIManager.put("TextFieldPlaceholder.inactiveForeground", MaterialColors.COSMO_LIGTH_GRAY);
             UIManager.put("TextFieldPlaceholder.inactiveBackground", MaterialColors.BLACK);
             UIManager.put("TextFieldPlaceholder.selectionBackground", MaterialColors.LIGHT_BLUE_400);
             UIManager.put("TextFieldPlaceholder.selectionForeground", MaterialColors.BLACK);
-            //UIManager.put("TextFieldPlaceholder.separatorColor", MaterialColors.PINK_700);
-            //UIManager.put("TextFieldPlaceholder.gapIconToPlaceholder", 10);
-            //UIManager.put("TextFieldPlaceholder.gapSeparatorToPlaceholder", 10);
-            //UIManager.put("TextFieldPlaceholder.gapTextToSeparator", 10);
             UIManager.setLookAndFeel(new MaterialLookAndFeel(new JMarsDarkTheme()));
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
