@@ -7,3 +7,5 @@ build
 #IntelliJ
 .idea
 *.iml
+
+gradle-private.properties

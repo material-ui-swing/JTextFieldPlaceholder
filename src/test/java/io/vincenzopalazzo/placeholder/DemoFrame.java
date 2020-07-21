@@ -1,13 +1,13 @@
 package io.vincenzopalazzo.placeholder;
 
-import io.swingsnackbar.SnackBar;
-import io.swingsnackbar.action.AbstractSnackBarAction;
 import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
 import mdlaf.MaterialLookAndFeel;
 import mdlaf.themes.JMarsDarkTheme;
 import mdlaf.utils.MaterialColors;
 import mdlaf.utils.MaterialFontFactory;
 import mdlaf.utils.MaterialImageFactory;
+import org.material.component.swingsnackbar.SnackBar;
+import org.material.component.swingsnackbar.action.AbstractSnackBarAction;
 
 import javax.swing.*;
 import java.awt.*;

@@ -205,6 +205,8 @@ public class JTextFieldPlaceholder extends JPanel {
         return this.iconContainer.getIcon();
     }
 
+    //TODO setEnabled
+
     //getter and setter
     public JToggleButton getIconContainer() {
         return iconContainer;

@@ -1,11 +1,11 @@
 package io.vincenzopalazzo.placeholder;
 
-import io.swingsnackbar.SnackBar;
 import io.vincenzopalazzo.placeholder.util.RoundedCornerBorder;
 import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
 import mdlaf.MaterialLookAndFeel;
 import mdlaf.utils.MaterialColors;
 import mdlaf.utils.MaterialImageFactory;
+import org.material.component.swingsnackbar.SnackBar;
 
 import javax.swing.*;
 import java.awt.*;
@@ -84,7 +84,7 @@ public class DemoFormLogin extends JFrame {
                                 MaterialColors.LIGHT_BLUE_400
                         )
                 )
-                .setDimension(150, 35)
+                .setDimension(250, 35)
                 .addAction(new AbstractAction() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
