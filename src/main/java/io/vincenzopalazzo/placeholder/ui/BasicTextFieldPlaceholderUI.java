@@ -12,7 +12,7 @@ import javax.swing.plaf.basic.BasicPanelUI;
 public class BasicTextFieldPlaceholderUI extends BasicPanelUI {
 
   protected static final String PREFIX = "TextFieldPlaceholder";
-  protected static final String PREFIX_FATHER = "Panel";
+  protected static final String PREFIX_FATHER = "TextField";
 
   protected static String UNSELECTED_ICON_PATH = "/icons/unselected.png";
   protected static String SELECTED_ICON_PATH = "/icons/selected.png";
@@ -53,13 +53,13 @@ public class BasicTextFieldPlaceholderUI extends BasicPanelUI {
     if (iconContainer != null) {
       iconContainer.setIcon(icon);
       iconContainer.setSelectedIcon(selectedIcon);
-      iconContainer.setOpaque(false);
+      //iconContainer.setOpaque(false);
       iconContainer.setBackground(this.background);
     }
 
     this.placeholder = textFieldPlaceholder.getPlaceholderComponent();
     if (placeholder != null) {
-      placeholder.setOpaque(false);
+      //placeholder.setOpaque(false);
       placeholder.setForeground(this.placeholderColor);
       placeholder.setBackground(this.background);
     }

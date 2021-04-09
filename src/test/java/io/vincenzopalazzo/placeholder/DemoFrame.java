@@ -10,6 +10,7 @@ import mdlaf.themes.JMarsDarkTheme;
 import mdlaf.utils.MaterialColors;
 import mdlaf.utils.MaterialFontFactory;
 import mdlaf.utils.MaterialImageFactory;
+import mdlaf.utils.icons.MaterialIconFont;
 import org.material.component.swingsnackbar.SnackBar;
 import org.material.component.swingsnackbar.action.AbstractSnackBarAction;
 
@@ -66,20 +67,20 @@ public class DemoFrame extends JFrame {
         .setPlaceholderText("Username")
         .setIcon(
             MaterialImageFactory.getInstance()
-                .getImage(GoogleMaterialDesignIcons.STAR, MaterialColors.COSMO_BLACK))
+                .getImage(MaterialIconFont.STAR, MaterialColors.COSMO_BLACK))
         .setSelectedIcon(
             MaterialImageFactory.getInstance()
-                .getImage(GoogleMaterialDesignIcons.STAR, MaterialColors.YELLOW_800))
+                .getImage(MaterialIconFont.STAR, MaterialColors.YELLOW_800))
         .setDisabledIcon(
             MaterialImageFactory.getInstance()
-                .getImage(GoogleMaterialDesignIcons.STAR, MaterialColors.GRAY_700))
+                .getImage(MaterialIconFont.STAR, MaterialColors.GRAY_700))
         .setDimension(350, 45);
 
     container.add(textFieldPlaceholder);
     JButton button =
         new JButton(
             MaterialImageFactory.getInstance()
-                .getImage(GoogleMaterialDesignIcons.SEND, MaterialColors.WHITE));
+                .getImage(MaterialIconFont.SEND, MaterialColors.WHITE));
 
     button.addActionListener(
         new AbstractAction() {

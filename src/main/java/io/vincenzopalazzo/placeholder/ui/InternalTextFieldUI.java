@@ -1,13 +1,15 @@
 package io.vincenzopalazzo.placeholder.ui;
 
 import io.vincenzopalazzo.placeholder.JTextFieldPlaceholder;
+import mdlaf.components.textfield.MaterialComponentField;
+
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicTextFieldUI;
 
-public class InternalTextFieldUI extends BasicTextFieldUI {
+public class InternalTextFieldUI extends MaterialComponentField {
 
   protected FocusListener focusListener = new LineFocusListener();
   protected JTextFieldPlaceholder textFieldPlaceholder;
@@ -23,7 +25,7 @@ public class InternalTextFieldUI extends BasicTextFieldUI {
     JTextField textField = (JTextField) c;
     c.setBackground(UIManager.getColor("TextFieldPlaceholder.background"));
     c.setForeground(UIManager.getColor("TextFieldPlaceholder.foreground"));
-    textField.setCaretColor(UIManager.getColor("TextFieldPlaceholder.caret"));
+    //textField.setCaretColor(UIManager.getColor("TextFieldPlaceholder.caret"));
   }
 
   @Override

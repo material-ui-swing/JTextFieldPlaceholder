@@ -17,7 +17,7 @@ public class InternalPasswordFieldUI extends InternalTextFieldUI {
     super.installUI(c);
     Character echoChar = (Character) UIManager.getDefaults().get("PasswordField.echoChar");
     if (echoChar != null) {
-      LookAndFeel.installProperty(getComponent(), "echoChar", echoChar);
+      LookAndFeel.installProperty(c, "echoChar", echoChar);
     }
   }
 

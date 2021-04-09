@@ -6,17 +6,19 @@ import java.awt.event.ActionEvent;
 import javax.swing.*;
 import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
 import mdlaf.MaterialLookAndFeel;
+import mdlaf.themes.MaterialOceanicTheme;
 import mdlaf.utils.MaterialColors;
 import mdlaf.utils.MaterialImageFactory;
+import mdlaf.utils.icons.MaterialIconFont;
 import org.material.component.swingsnackbar.SnackBar;
 
 public class DemoFormLogin extends JFrame {
 
   static {
     try {
-      UIManager.setLookAndFeel(new MaterialLookAndFeel());
-      UIManager.put("TextFieldPlaceholder[Line].inactiveColor", MaterialColors.BLACK);
-      UIManager.put("TextFieldPlaceholder[Line].activeColor", MaterialColors.LIGHT_BLUE_400);
+      UIManager.setLookAndFeel(new MaterialLookAndFeel(new MaterialOceanicTheme()));
+      //UIManager.put("TextFieldPlaceholder[Line].inactiveColor", MaterialColors.BLACK);
+      //UIManager.put("TextFieldPlaceholder[Line].activeColor", MaterialColors.LIGHT_BLUE_400);
     } catch (UnsupportedLookAndFeelException e) {
       e.printStackTrace();
     }
@@ -49,17 +51,17 @@ public class DemoFormLogin extends JFrame {
 
     form = new JPanel();
     form.setLayout(new BoxLayout(form, BoxLayout.PAGE_AXIS));
-    form.setBackground(MaterialColors.COSMO_STRONG_GRAY);
+    //form.setBackground(MaterialColors.COSMO_STRONG_GRAY);
     form.setBorder(new RoundedCornerBorder(MaterialColors.COSMO_STRONG_GRAY, 15));
 
     this.usernameForm = new JTextFieldPlaceholder(new JTextField(12));
 
     this.usernameForm
         .setPlaceholderText("Username")
-        .setIcon(MaterialImageFactory.getInstance().getImage(GoogleMaterialDesignIcons.STAR))
+        .setIcon(MaterialImageFactory.getInstance().getImage(MaterialIconFont.STAR))
         .setSelectedIcon(
             MaterialImageFactory.getInstance()
-                .getImage(GoogleMaterialDesignIcons.STAR, MaterialColors.LIGHT_BLUE_400))
+                .getImage(MaterialIconFont.STAR, MaterialColors.LIGHT_BLUE_400))
         .setDimension(250, 35);
 
     form.add(Box.createVerticalStrut(35));
@@ -70,10 +72,10 @@ public class DemoFormLogin extends JFrame {
     this.passwordFieldForm
         .setPlaceholderText("Password")
         .setIcon(
-            MaterialImageFactory.getInstance().getImage(GoogleMaterialDesignIcons.VISIBILITY_OFF))
+            MaterialImageFactory.getInstance().getImage(MaterialIconFont.VISIBILITY_OFF))
         .setSelectedIcon(
             MaterialImageFactory.getInstance()
-                .getImage(GoogleMaterialDesignIcons.VISIBILITY, MaterialColors.LIGHT_BLUE_400))
+                .getImage(MaterialIconFont.VISIBILITY, MaterialColors.LIGHT_BLUE_400))
         .setDimension(250, 35)
         .addAction(
             new AbstractAction() {
