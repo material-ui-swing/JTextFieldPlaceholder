@@ -4,7 +4,6 @@ import io.vincenzopalazzo.placeholder.util.RoundedCornerBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
-import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons;
 import mdlaf.MaterialLookAndFeel;
 import mdlaf.themes.MaterialOceanicTheme;
 import mdlaf.utils.MaterialColors;
@@ -17,8 +16,8 @@ public class DemoFormLogin extends JFrame {
   static {
     try {
       UIManager.setLookAndFeel(new MaterialLookAndFeel(new MaterialOceanicTheme()));
-      //UIManager.put("TextFieldPlaceholder[Line].inactiveColor", MaterialColors.BLACK);
-      //UIManager.put("TextFieldPlaceholder[Line].activeColor", MaterialColors.LIGHT_BLUE_400);
+      // UIManager.put("TextFieldPlaceholder[Line].inactiveColor", MaterialColors.BLACK);
+      // UIManager.put("TextFieldPlaceholder[Line].activeColor", MaterialColors.LIGHT_BLUE_400);
     } catch (UnsupportedLookAndFeelException e) {
       e.printStackTrace();
     }
@@ -51,7 +50,7 @@ public class DemoFormLogin extends JFrame {
 
     form = new JPanel();
     form.setLayout(new BoxLayout(form, BoxLayout.PAGE_AXIS));
-    //form.setBackground(MaterialColors.COSMO_STRONG_GRAY);
+    // form.setBackground(MaterialColors.COSMO_STRONG_GRAY);
     form.setBorder(new RoundedCornerBorder(MaterialColors.COSMO_STRONG_GRAY, 15));
 
     this.usernameForm = new JTextFieldPlaceholder(new JTextField(12));
@@ -71,8 +70,7 @@ public class DemoFormLogin extends JFrame {
 
     this.passwordFieldForm
         .setPlaceholderText("Password")
-        .setIcon(
-            MaterialImageFactory.getInstance().getImage(MaterialIconFont.VISIBILITY_OFF))
+        .setIcon(MaterialImageFactory.getInstance().getImage(MaterialIconFont.VISIBILITY_OFF))
         .setSelectedIcon(
             MaterialImageFactory.getInstance()
                 .getImage(MaterialIconFont.VISIBILITY, MaterialColors.LIGHT_BLUE_400))
