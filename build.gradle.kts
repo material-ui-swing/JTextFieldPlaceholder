@@ -1,5 +1,6 @@
 plugins {
     `java-library`
+    id("com.github.sherter.google-java-format") version "0.9"
     `maven-publish`
     signing
 }
@@ -12,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    implementation("io.github.vincenzopalazzo:material-ui-swing:1.1.1-rc4")
+    implementation("io.github.vincenzopalazzo:material-ui-swing:1.1.2-rc2")
     testImplementation("io.github.material-ui-swing:SwingSnackBar:0.0.1-rc6")
     testImplementation("com.github.jiconfont:jiconfont-google_material_design_icons:2.2.0.2")
 }
