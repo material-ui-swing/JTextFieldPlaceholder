@@ -80,7 +80,6 @@ public class JTextFieldPlaceholder extends JPanel {
 
     placeholder = new JLabel();
     placeholder.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 2));
-
     separator = new JSeparator(JSeparator.VERTICAL);
   }
 
@@ -168,7 +167,7 @@ public class JTextFieldPlaceholder extends JPanel {
   }
 
   public JTextFieldPlaceholder setPlaceholderText(String text) {
-    if (text == null || text.isEmpty()) throw new IllegalArgumentException("Invalid text");
+    if (text == null) throw new IllegalArgumentException("Invalid text");
     placeholder.setText(text);
     return this;
   }
