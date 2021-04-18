@@ -17,7 +17,7 @@ public class DemoFrame extends JFrame {
 
   static {
     try {
-     /* UIManager.put("TextFieldPlaceholder.placeholderColor", MaterialColors.COSMO_BLACK);
+      /* UIManager.put("TextFieldPlaceholder.placeholderColor", MaterialColors.COSMO_BLACK);
       UIManager.put("TextFieldPlaceholder.background", MaterialColors.COSMO_LIGTH_GRAY);
       UIManager.put("TextFieldPlaceholder.foreground", MaterialColors.BLACK);
       UIManager.put("TextFieldPlaceholder[Line].activeColor", MaterialColors.COSMO_BLUE);
@@ -48,7 +48,7 @@ public class DemoFrame extends JFrame {
   public void initView() {
     initComponent();
     textFieldPlaceholder.setText("DISABLED");
-    //textFieldPlaceholder.setEnabled(false);
+    // textFieldPlaceholder.setEnabled(false);
     super.setContentPane(container);
     super.setSize(new Dimension(400, 400));
     super.setTitle("New Swing component from @vincenzopalazzo");
@@ -108,9 +108,10 @@ public class DemoFrame extends JFrame {
   }
 
   public static void main(String[] args) {
-    SwingUtilities.invokeLater( () -> {
-            DemoFrame demoFrame = new DemoFrame();
-            demoFrame.initView();
+    SwingUtilities.invokeLater(
+        () -> {
+          DemoFrame demoFrame = new DemoFrame();
+          demoFrame.initView();
         });
   }
 }
