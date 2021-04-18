@@ -80,73 +80,23 @@ public class JTextFieldPlaceholder extends JPanel {
 
     placeholder = new JLabel();
     placeholder.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 2));
-
     separator = new JSeparator(JSeparator.VERTICAL);
   }
 
   protected void initLayout() {
-    GroupLayout groupLayout = new GroupLayout(this);
-    this.setLayout(groupLayout);
-
-    groupLayout.setHorizontalGroup(
-        groupLayout
-            .createSequentialGroup()
-            .addComponent(
-                this.iconContainer,
-                GroupLayout.DEFAULT_SIZE,
-                GroupLayout.DEFAULT_SIZE,
-                GroupLayout.DEFAULT_SIZE)
-            .addGap(this.gapIconToPlaceholder)
-            .addComponent(
-                this.placeholder,
-                GroupLayout.PREFERRED_SIZE,
-                GroupLayout.PREFERRED_SIZE,
-                GroupLayout.PREFERRED_SIZE)
-            .addGap(this.gapSeparatorToPlaceholder)
-            .addComponent(
-                this.separator,
-                GroupLayout.PREFERRED_SIZE,
-                GroupLayout.PREFERRED_SIZE,
-                GroupLayout.PREFERRED_SIZE)
-            .addGap(this.gapTextToSeparator)
-            .addComponent(
-                this.textField,
-                GroupLayout.PREFERRED_SIZE,
-                GroupLayout.PREFERRED_SIZE,
-                GroupLayout.PREFERRED_SIZE));
-
-    groupLayout.setVerticalGroup(
-        groupLayout
-            .createParallelGroup(GroupLayout.Alignment.CENTER, true)
-            .addComponent(this.iconContainer)
-            .addComponent(
-                this.placeholder,
-                GroupLayout.PREFERRED_SIZE,
-                GroupLayout.PREFERRED_SIZE,
-                GroupLayout.PREFERRED_SIZE)
-            .addComponent(this.separator)
-            .addGroup(
-                groupLayout
-                    .createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(
-                        this.textField,
-                        GroupLayout.PREFERRED_SIZE,
-                        GroupLayout.PREFERRED_SIZE,
-                        GroupLayout.PREFERRED_SIZE)));
-  }
-
-  /**
-   * @param dimensionComponent
-   * @return JtextFieldPlaceholder component
-   * @deprecated This method will be removed in the version 0.1.0
-   */
-  @Deprecated
-  public JTextFieldPlaceholder setDimensionComponent(Dimension dimensionComponent) {
-    textField.setPreferredSize(dimensionComponent);
-    this.setPreferredSize(new Dimension(dimensionComponent.width, dimensionComponent.height + 10));
-    textField.setSize(dimensionComponent);
-    this.setSize(new Dimension(dimensionComponent.width, dimensionComponent.height + 10));
-    return this;
+    this.setLayout(new BorderLayout());
+    JPanel leftPanel = new JPanel();
+    leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.X_AXIS));
+    this.iconContainer.setBorder(
+        BorderFactory.createEmptyBorder(0, 0, 0, this.gapIconToPlaceholder));
+    leftPanel.add(this.iconContainer);
+    this.placeholder.setBorder(
+        BorderFactory.createEmptyBorder(0, 0, 0, this.gapSeparatorToPlaceholder));
+    leftPanel.add(this.placeholder);
+    this.separator.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, this.gapTextToSeparator));
+    leftPanel.add(this.separator);
+    this.add(leftPanel, BorderLayout.WEST);
+    this.add(textField, BorderLayout.CENTER);
   }
 
   public JTextFieldPlaceholder setIcon(Icon icon) {
@@ -168,7 +118,7 @@ public class JTextFieldPlaceholder extends JPanel {
   }
 
   public JTextFieldPlaceholder setPlaceholderText(String text) {
-    if (text == null || text.isEmpty()) throw new IllegalArgumentException("Invalid text");
+    if (text == null) throw new IllegalArgumentException("Invalid text");
     placeholder.setText(text);
     return this;
   }
@@ -193,7 +143,7 @@ public class JTextFieldPlaceholder extends JPanel {
   }
 
   public JTextFieldPlaceholder setText(String text) {
-    if (text == null || text.isEmpty()) throw new IllegalArgumentException("Invalid text");
+    if (text == null) throw new IllegalArgumentException("Invalid text");
     this.textField.setText(text);
     return this;
   }

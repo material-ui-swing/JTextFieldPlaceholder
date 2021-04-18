@@ -17,7 +17,7 @@ public class DemoFrame extends JFrame {
 
   static {
     try {
-      UIManager.put("TextFieldPlaceholder.placeholderColor", MaterialColors.COSMO_BLACK);
+      /*
       UIManager.put("TextFieldPlaceholder.background", MaterialColors.COSMO_LIGTH_GRAY);
       UIManager.put("TextFieldPlaceholder.foreground", MaterialColors.BLACK);
       UIManager.put("TextFieldPlaceholder[Line].activeColor", MaterialColors.COSMO_BLUE);
@@ -34,7 +34,8 @@ public class DemoFrame extends JFrame {
       UIManager.put("TextFieldPlaceholder.inactiveForeground", MaterialColors.COSMO_LIGTH_GRAY);
       UIManager.put("TextFieldPlaceholder.inactiveBackground", MaterialColors.BLACK);
       UIManager.put("TextFieldPlaceholder.selectionBackground", MaterialColors.LIGHT_BLUE_400);
-      UIManager.put("TextFieldPlaceholder.selectionForeground", MaterialColors.BLACK);
+      UIManager.put("TextFieldPlaceholder.selectionForeground", MaterialColors.BLACK);*/
+      UIManager.put("TextFieldPlaceholder.placeholderColor", MaterialColors.RED_800);
       UIManager.setLookAndFeel(new MaterialLookAndFeel(new JMarsDarkTheme()));
     } catch (UnsupportedLookAndFeelException e) {
       e.printStackTrace();
@@ -43,12 +44,11 @@ public class DemoFrame extends JFrame {
 
   private JFrame frame = this;
   private JPanel container;
-  private JTextFieldPlaceholder textFieldPlaceholder;
+  private JMarsSearch textFieldPlaceholder;
 
   public void initView() {
     initComponent();
-    textFieldPlaceholder.setText("DISABLED");
-    textFieldPlaceholder.setEnabled(false);
+    // textFieldPlaceholder.setEnabled(false);
     super.setContentPane(container);
     super.setSize(new Dimension(400, 400));
     super.setTitle("New Swing component from @vincenzopalazzo");
@@ -60,22 +60,21 @@ public class DemoFrame extends JFrame {
   public void initComponent() {
     container = new JPanel();
     // Init component
-    textFieldPlaceholder = new JTextFieldPlaceholder();
-    // configure component
+    Icon icon =
+        MaterialImageFactory.getInstance()
+            .getImage(MaterialIconFont.LOCATION_SEARCHING, 16, MaterialColors.COSMO_DARK_GRAY);
+    JTextField textField = new JTextField();
+    textField.setPreferredSize(new Dimension(100, 20));
+    textFieldPlaceholder = new JMarsSearch(textField, icon);
+    icon =
+        MaterialImageFactory.getInstance()
+            .getImage(MaterialIconFont.SEARCH, 20, MaterialColors.COSMO_DARK_GRAY);
     textFieldPlaceholder
-        .setPlaceholderText("Username")
-        .setIcon(
-            MaterialImageFactory.getInstance()
-                .getImage(MaterialIconFont.STAR, MaterialColors.COSMO_BLACK))
-        .setSelectedIcon(
-            MaterialImageFactory.getInstance()
-                .getImage(MaterialIconFont.STAR, MaterialColors.YELLOW_800))
-        .setDisabledIcon(
-            MaterialImageFactory.getInstance()
-                .getImage(MaterialIconFont.STAR, MaterialColors.GRAY_700))
-        .setDimension(350, 45);
-
+        .setIcon(icon)
+        .setPlaceholderTextColor(MaterialColors.RED_800)
+        .setPlaceholderText("Lat/Lon");
     container.add(textFieldPlaceholder);
+
     JButton button =
         new JButton(
             MaterialImageFactory.getInstance()
@@ -116,12 +115,9 @@ public class DemoFrame extends JFrame {
 
   public static void main(String[] args) {
     SwingUtilities.invokeLater(
-        new Runnable() {
-          @Override
-          public void run() {
-            DemoFrame demoFrame = new DemoFrame();
-            demoFrame.initView();
-          }
+        () -> {
+          DemoFrame demoFrame = new DemoFrame();
+          demoFrame.initView();
         });
   }
 }

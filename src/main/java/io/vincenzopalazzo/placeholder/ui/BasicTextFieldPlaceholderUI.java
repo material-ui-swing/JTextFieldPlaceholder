@@ -5,6 +5,8 @@ import io.vincenzopalazzo.placeholder.listener.AbstractFocusComponent;
 import io.vincenzopalazzo.placeholder.util.ComponentUtil;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicPanelUI;
@@ -29,6 +31,7 @@ public class BasicTextFieldPlaceholderUI extends BasicPanelUI {
   protected JTextField textField;
   protected JLabel placeholder;
   protected TextFieldPlaceholderFocusListener focusListener;
+  protected PropertyChangeListener changeListener;
 
   @SuppressWarnings({"MethodOverridesStaticMethodOfSuperclass", "UnusedDeclaration"})
   public static ComponentUI createUI(JComponent c) {
@@ -37,6 +40,7 @@ public class BasicTextFieldPlaceholderUI extends BasicPanelUI {
 
   public BasicTextFieldPlaceholderUI() {
     this.focusListener = new TextFieldPlaceholderFocusListener();
+    this.changeListener = new ObserveValues();
   }
 
   @Override
@@ -167,10 +171,12 @@ public class BasicTextFieldPlaceholderUI extends BasicPanelUI {
 
   protected void installListener() {
     this.textFieldPlaceholder.addMouseListener(focusListener);
+    if (this.placeholder != null) this.placeholder.addPropertyChangeListener(changeListener);
   }
 
   protected void uninstallListener() {
     this.textFieldPlaceholder.removeMouseListener(focusListener);
+    if (this.placeholder != null) this.placeholder.removePropertyChangeListener(changeListener);
   }
 
   protected void paintLine(Graphics graphics) {
@@ -202,6 +208,19 @@ public class BasicTextFieldPlaceholderUI extends BasicPanelUI {
     public void mouseClicked(MouseEvent e) {
       if (textField != null) {
         textField.requestFocusInWindow();
+      }
+    }
+  }
+
+  // TODO make a UI for placeholder text
+  protected class ObserveValues implements PropertyChangeListener {
+
+    protected static final String FOREGROUND = "foreground";
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+      if (FOREGROUND.equals(evt.getPropertyName())) {
+        placeholderColor = (Color) evt.getNewValue();
       }
     }
   }
