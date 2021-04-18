@@ -17,7 +17,7 @@ public class DemoFrame extends JFrame {
 
   static {
     try {
-      /* UIManager.put("TextFieldPlaceholder.placeholderColor", MaterialColors.COSMO_BLACK);
+      /*
       UIManager.put("TextFieldPlaceholder.background", MaterialColors.COSMO_LIGTH_GRAY);
       UIManager.put("TextFieldPlaceholder.foreground", MaterialColors.BLACK);
       UIManager.put("TextFieldPlaceholder[Line].activeColor", MaterialColors.COSMO_BLUE);
@@ -35,6 +35,7 @@ public class DemoFrame extends JFrame {
       UIManager.put("TextFieldPlaceholder.inactiveBackground", MaterialColors.BLACK);
       UIManager.put("TextFieldPlaceholder.selectionBackground", MaterialColors.LIGHT_BLUE_400);
       UIManager.put("TextFieldPlaceholder.selectionForeground", MaterialColors.BLACK);*/
+      UIManager.put("TextFieldPlaceholder.placeholderColor", MaterialColors.RED_800);
       UIManager.setLookAndFeel(new MaterialLookAndFeel(new JMarsDarkTheme()));
     } catch (UnsupportedLookAndFeelException e) {
       e.printStackTrace();
@@ -47,7 +48,6 @@ public class DemoFrame extends JFrame {
 
   public void initView() {
     initComponent();
-    textFieldPlaceholder.setText("DISABLED");
     // textFieldPlaceholder.setEnabled(false);
     super.setContentPane(container);
     super.setSize(new Dimension(400, 400));
@@ -60,13 +60,19 @@ public class DemoFrame extends JFrame {
   public void initComponent() {
     container = new JPanel();
     // Init component
-    Icon icon = MaterialImageFactory.getInstance().getImage(MaterialIconFont.LOCATION_SEARCHING);
-    textFieldPlaceholder = new JMarsSearch(icon);
-    icon = MaterialImageFactory.getInstance().getImage(MaterialIconFont.SEARCH);
-    textFieldPlaceholder.setIcon(icon);
-    textFieldPlaceholder.setSelectedIcon(icon);
-    // configure component
-    textFieldPlaceholder.setPlaceholderText("Lat/Lon");
+    Icon icon =
+        MaterialImageFactory.getInstance()
+            .getImage(MaterialIconFont.LOCATION_SEARCHING, 16, MaterialColors.COSMO_DARK_GRAY);
+    JTextField textField = new JTextField();
+    textField.setPreferredSize(new Dimension(100, 20));
+    textFieldPlaceholder = new JMarsSearch(textField, icon);
+    icon =
+        MaterialImageFactory.getInstance()
+            .getImage(MaterialIconFont.SEARCH, 20, MaterialColors.COSMO_DARK_GRAY);
+    textFieldPlaceholder
+        .setIcon(icon)
+        .setPlaceholderTextColor(MaterialColors.RED_800)
+        .setPlaceholderText("Lat/Lon");
     container.add(textFieldPlaceholder);
 
     JButton button =
