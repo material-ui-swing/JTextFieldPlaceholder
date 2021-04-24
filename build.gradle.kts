@@ -6,7 +6,7 @@ plugins {
 }
 
 group = project.property("GROUP_ID")!!
-version = project.property("MODULE_NAME")!!
+version = project.property("VERSION")!!
 
 repositories {
     jcenter()

@@ -15,6 +15,7 @@ public class DemoFormLogin extends JFrame {
 
   static {
     try {
+      UIManager.put("Placeholder.foreground", MaterialColors.COSMO_STRONG_GRAY);
       UIManager.setLookAndFeel(new MaterialLookAndFeel(new MaterialOceanicTheme()));
       // UIManager.put("TextFieldPlaceholder[Line].inactiveColor", MaterialColors.BLACK);
       // UIManager.put("TextFieldPlaceholder[Line].activeColor", MaterialColors.LIGHT_BLUE_400);
