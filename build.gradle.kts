@@ -71,11 +71,11 @@ publishing {
             repositories {
                 maven {
                     credentials {
-                        username = project.property("sonatypeUsername").toString()
-                        password = project.property("sonatypePassword").toString()
+                        username = System.getenv("MAVEN_USERNAME").toString()
+                        password = System.getenv("MAVEN_PASSWORD").toString()
                     }
-                    val releasesRepoUrl = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
-                    val snapshotsRepoUrl = uri("https://oss.sonatype.org/content/repositories/snapshots/")
+                    val releasesRepoUrl = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2")
+                    val snapshotsRepoUrl = uri("https://oss.sonatype.org/content/repositories/snapshots")
                     url = if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
                 }
             }
