@@ -1,5 +1,6 @@
 # JTextFieldPlaceholder
-![Maven Central](https://img.shields.io/maven-central/v/material-ui-swing/JTextFieldPlaceholder?color=orange&style=for-the-badge)
+
+![Maven Central](https://img.shields.io/maven-central/v/io.github.material-ui-swing/JTextFieldPlaceholder?style=flat-square)
 
 Simple Swing component with placeholder called JTextFieldPlaceholder
 
