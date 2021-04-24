@@ -1,5 +1,6 @@
 package io.vincenzopalazzo.placeholder;
 
+import io.vincenzopalazzo.placeholder.action.AbstractOnClick;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
@@ -35,7 +36,8 @@ public class DemoFrame extends JFrame {
       UIManager.put("TextFieldPlaceholder.inactiveBackground", MaterialColors.BLACK);
       UIManager.put("TextFieldPlaceholder.selectionBackground", MaterialColors.LIGHT_BLUE_400);
       UIManager.put("TextFieldPlaceholder.selectionForeground", MaterialColors.BLACK);*/
-      UIManager.put("TextFieldPlaceholder.placeholderColor", MaterialColors.RED_800);
+      UIManager.put("Placeholder.foreground", MaterialColors.COSMO_DARK_GRAY);
+
       UIManager.setLookAndFeel(new MaterialLookAndFeel(new JMarsDarkTheme()));
     } catch (UnsupportedLookAndFeelException e) {
       e.printStackTrace();
@@ -63,15 +65,24 @@ public class DemoFrame extends JFrame {
     Icon icon =
         MaterialImageFactory.getInstance()
             .getImage(MaterialIconFont.LOCATION_SEARCHING, 16, MaterialColors.COSMO_DARK_GRAY);
+    Icon menu =
+        MaterialImageFactory.getInstance()
+            .getImage(MaterialIconFont.MORE_VERT, 22, MaterialColors.COSMO_DARK_GRAY);
     JTextField textField = new JTextField();
     textField.setPreferredSize(new Dimension(100, 20));
-    textFieldPlaceholder = new JMarsSearch(textField, icon);
+    textFieldPlaceholder = new JMarsSearch(textField, icon, menu);
     icon =
         MaterialImageFactory.getInstance()
             .getImage(MaterialIconFont.SEARCH, 20, MaterialColors.COSMO_DARK_GRAY);
     textFieldPlaceholder
+        .addMenuActions(
+            new AbstractOnClick() {
+              @Override
+              public void mouseClicked(MouseEvent e) {
+                SnackBar.make(frame, "Menu button", "").run();
+              }
+            })
         .setIcon(icon)
-        .setPlaceholderTextColor(MaterialColors.RED_800)
         .setPlaceholderText("Lat/Lon");
     container.add(textFieldPlaceholder);
 

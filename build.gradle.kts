@@ -88,7 +88,7 @@ publishing {
                 licenses {
                     license {
                         name.set("BSD 3-Clause \"New\" or \"Revised\"")
-                        url.set("https://github.com/material-ui-swing/SwingSnackBar/blob/master/LICENSE.md")
+                        url.set("https://github.com/material-ui-swing/JTextFieldPlaceholder/blob/master/LICENSE.md")
                     }
                 }
 

@@ -1,5 +1,6 @@
 package io.vincenzopalazzo.placeholder;
 
+import io.vincenzopalazzo.placeholder.ui.BasicPlaceholderUI;
 import io.vincenzopalazzo.placeholder.ui.BasicTextFieldPlaceholderUI;
 import io.vincenzopalazzo.placeholder.ui.InternalPasswordFieldUI;
 import io.vincenzopalazzo.placeholder.ui.InternalTextFieldUI;
@@ -47,6 +48,16 @@ public class JTextFieldPlaceholder extends JPanel {
       setUI(ui);
     }
     this.setCorrectTextFieldUI();
+
+    if (this.placeholder == null) return;
+
+    if (UIManager.get(BasicPlaceholderUI.PREFIX) != null) {
+      BasicPlaceholderUI ui = (BasicPlaceholderUI) UIManager.getUI(placeholder);
+      this.placeholder.setUI(ui);
+    } else {
+      BasicPlaceholderUI ui = new BasicPlaceholderUI();
+      this.placeholder.setUI(ui);
+    }
   }
 
   @Override
@@ -62,7 +73,6 @@ public class JTextFieldPlaceholder extends JPanel {
 
   protected void initStyle() {
     setBackground(textField.getBackground());
-
     setBorder(new RoundedCornerBorder(getBackground(), 7));
 
     int height = this.placeholder.getFontMetrics(this.placeholder.getFont()).getHeight() - 5;
@@ -71,7 +81,7 @@ public class JTextFieldPlaceholder extends JPanel {
     separator.setMaximumSize(new Dimension(2, height));
 
     this.iconContainer.setFocusable(false);
-    this.placeholder.setFocusable(false);
+    this.placeholder.setUI(new BasicPlaceholderUI());
   }
 
   protected void initComponent() {
@@ -176,8 +186,6 @@ public class JTextFieldPlaceholder extends JPanel {
   public Icon getIcon() {
     return this.iconContainer.getIcon();
   }
-
-  // TODO setEnabled
 
   // getter and setter
   public JToggleButton getIconContainer() {
