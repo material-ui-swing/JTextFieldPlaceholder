@@ -3,9 +3,6 @@ name: Publish package to the Maven Central Repository
 on:
   release:
     types: [created]
-  #push:
-  # branches:
-  #    - master
 
 jobs:
   build:
@@ -24,7 +21,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-      #- name: Veryfy Java Code Style
+      #- name: Verify Java Code Style
       #  run: ./gradlew verifyGoogleJavaFormat
       - name: Build with Gradle
         run: ./gradlew compileJava
