@@ -3,9 +3,13 @@ package io.vincenzopalazzo.placeholder.ui;
 import io.vincenzopalazzo.placeholder.JTextFieldPlaceholder;
 import io.vincenzopalazzo.placeholder.listener.AbstractFocusComponent;
 import io.vincenzopalazzo.placeholder.util.ComponentUtil;
+import io.vincenzopalazzo.placeholder.util.RoundedCornerBorder;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicPanelUI;
 
@@ -25,6 +29,7 @@ public class BasicTextFieldPlaceholderUI extends BasicPanelUI {
   protected Color colorUnfocusLine;
   protected Color separatorColor;
   protected Color placeholderColor;
+  private Border border;
   protected JTextFieldPlaceholder textFieldPlaceholder;
   protected JTextField textField;
   protected TextFieldPlaceholderFocusListener focusListener;
@@ -81,7 +86,7 @@ public class BasicTextFieldPlaceholderUI extends BasicPanelUI {
     this.disabledBackground = tmp == null ? Color.CYAN : tmp;
     tmp = UIManager.getColor(this.getPrefix() + ".disabledForeground");
     this.disabledForeground = tmp == null ? Color.CYAN : tmp;
-
+    this.textFieldPlaceholder.setBorder(this.border);
     this.installListener();
   }
 
@@ -97,10 +102,21 @@ public class BasicTextFieldPlaceholderUI extends BasicPanelUI {
     } else {
       LookAndFeel.installColorsAndFont(
           p, this.getPrefix() + ".background", this.getPrefix() + ".foreground", ".font");
+      LookAndFeel.installBorder(p, PREFIX_FATHER + ".border");
       LookAndFeel.installBorder(p, this.getPrefix() + ".border");
     }
+    this.border = UIManager.getBorder(this.getPrefix() + ".border");
     this.background = p.getBackground();
     this.foreground = p.getForeground();
+
+    if (this.border == null) {
+      this.border = new BorderUIResource(BorderFactory.createCompoundBorder(
+              new RoundedCornerBorder(this.background, 7),
+              BorderFactory.createEmptyBorder(10,10,10,10)
+      )
+      );
+    }
+
     this.colorFocusLine =
         UIManager.getColor(this.getPrefix() + "[Line].activeColor") == null
             ? Color.CYAN
@@ -166,7 +182,7 @@ public class BasicTextFieldPlaceholderUI extends BasicPanelUI {
     }
     graphics.setColor(colorLine);
     graphics.fillRect(
-        0, textFieldPlaceholder.getHeight() - 3, this.textFieldPlaceholder.getWidth() - 5, 1);
+        0, textFieldPlaceholder.getBounds().height - 3, this.textFieldPlaceholder.getBounds().width - 5, 1);
   }
   // getter
   public String getPrefix() {

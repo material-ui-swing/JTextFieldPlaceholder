@@ -4,7 +4,6 @@ import io.vincenzopalazzo.placeholder.ui.BasicPlaceholderUI;
 import io.vincenzopalazzo.placeholder.ui.BasicTextFieldPlaceholderUI;
 import io.vincenzopalazzo.placeholder.ui.InternalPasswordFieldUI;
 import io.vincenzopalazzo.placeholder.ui.InternalTextFieldUI;
-import io.vincenzopalazzo.placeholder.util.RoundedCornerBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -73,7 +72,6 @@ public class JTextFieldPlaceholder extends JPanel {
 
   protected void initStyle() {
     setBackground(textField.getBackground());
-    setBorder(new RoundedCornerBorder(getBackground(), 7));
 
     int height = this.placeholder.getFontMetrics(this.placeholder.getFont()).getHeight() - 5;
     separator.setPreferredSize(new Dimension(2, height));
