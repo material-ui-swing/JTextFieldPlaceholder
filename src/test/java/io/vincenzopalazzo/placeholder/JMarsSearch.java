@@ -1,17 +1,17 @@
 package io.vincenzopalazzo.placeholder;
 
+import io.vincenzopalazzo.placeholder.action.AbstractOnClick;
 import java.awt.*;
 import java.awt.event.MouseListener;
 import javax.swing.*;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.components.button.MaterialButtonUI;
-import mdlaf.utils.MaterialColors;
 
 public class JMarsSearch extends JTextFieldPlaceholder {
 
   private JLabel placeholderIcon;
   private JPanel placeholderContainer;
-  private JButton searchButton;
+  private JLabel searchButton;
   private JLabel menuButton;
 
   public JMarsSearch(Icon placeholderIcon, Icon menu) {
@@ -30,8 +30,7 @@ public class JMarsSearch extends JTextFieldPlaceholder {
   @Override
   protected void initComponent() {
     super.initComponent();
-    searchButton = new JButton(this.iconContainer.getIcon());
-    this.searchButton.setUI(new PlaceholderButtonUI());
+    searchButton = new JLabel(this.iconContainer.getIcon());
     this.menuButton = new JLabel();
     placeholderContainer = new JPanel();
     placeholderContainer.setBackground(this.getBackground());
@@ -55,15 +54,14 @@ public class JMarsSearch extends JTextFieldPlaceholder {
   }
 
   @Override
-  public void updateUI() {
-    super.updateUI();
-    if (this.searchButton != null) this.searchButton.setUI(new PlaceholderButtonUI());
-    if (this.placeholder != null) this.placeholder.setBackground(MaterialColors.COSMO_RED);
+  protected void initStyle() {
+    super.initStyle();
   }
 
   @Override
   protected void initLayout() {
     this.setLayout(new BorderLayout());
+    searchButton.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
     this.add(searchButton, BorderLayout.WEST);
     this.add(textField, BorderLayout.CENTER);
     this.add(placeholderContainer, BorderLayout.EAST);
@@ -76,6 +74,11 @@ public class JMarsSearch extends JTextFieldPlaceholder {
     }
 
     this.placeholderContainer.add(super.placeholder, BorderLayout.CENTER);
+  }
+
+  public JMarsSearch setOnSearchAction(AbstractOnClick onClick) {
+    this.searchButton.addMouseListener(onClick);
+    return this;
   }
 
   public JMarsSearch setPlaceholderIcon(Icon placeholderIcon) {
@@ -111,7 +114,7 @@ public class JMarsSearch extends JTextFieldPlaceholder {
     return this;
   }
 
-  private class PlaceholderButtonUI extends MaterialButtonUI {
+  protected class PlaceholderButtonUI extends MaterialButtonUI {
 
     @Override
     public void installUI(JComponent c) {
