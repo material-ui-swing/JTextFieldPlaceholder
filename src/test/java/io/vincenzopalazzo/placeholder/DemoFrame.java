@@ -10,7 +10,6 @@ import javax.swing.plaf.BorderUIResource;
 import mdlaf.MaterialLookAndFeel;
 import mdlaf.themes.JMarsDarkTheme;
 import mdlaf.themes.MaterialTheme;
-import mdlaf.utils.MaterialBorders;
 import mdlaf.utils.MaterialColors;
 import mdlaf.utils.MaterialFontFactory;
 import mdlaf.utils.MaterialImageFactory;
@@ -44,11 +43,10 @@ public class DemoFrame extends JFrame {
       UIManager.put("Placeholder.foreground", MaterialColors.COSMO_DARK_GRAY);
       UIManager.put(
           "TextFieldPlaceholder.border",
-          new BorderUIResource(BorderFactory.createCompoundBorder(
+          new BorderUIResource(
+              BorderFactory.createCompoundBorder(
                   new RoundedCornerBorder(theme.getBackgroundPrimary(), 7),
-                  BorderFactory.createEmptyBorder(10,10,10,10)
-                  )
-          ));
+                  BorderFactory.createEmptyBorder(10, 10, 10, 10))));
       UIManager.setLookAndFeel(new MaterialLookAndFeel(theme));
     } catch (UnsupportedLookAndFeelException e) {
       e.printStackTrace();

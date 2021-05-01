@@ -1,13 +1,11 @@
 package io.vincenzopalazzo.placeholder;
 
+import io.vincenzopalazzo.placeholder.action.AbstractOnClick;
 import java.awt.*;
 import java.awt.event.MouseListener;
 import javax.swing.*;
-
-import io.vincenzopalazzo.placeholder.action.AbstractOnClick;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.components.button.MaterialButtonUI;
-import mdlaf.utils.MaterialColors;
 
 public class JMarsSearch extends JTextFieldPlaceholder {
 
@@ -63,7 +61,7 @@ public class JMarsSearch extends JTextFieldPlaceholder {
   @Override
   protected void initLayout() {
     this.setLayout(new BorderLayout());
-    searchButton.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+    searchButton.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
     this.add(searchButton, BorderLayout.WEST);
     this.add(textField, BorderLayout.CENTER);
     this.add(placeholderContainer, BorderLayout.EAST);

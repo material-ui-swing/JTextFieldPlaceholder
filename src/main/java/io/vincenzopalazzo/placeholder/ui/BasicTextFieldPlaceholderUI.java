@@ -4,7 +4,6 @@ import io.vincenzopalazzo.placeholder.JTextFieldPlaceholder;
 import io.vincenzopalazzo.placeholder.listener.AbstractFocusComponent;
 import io.vincenzopalazzo.placeholder.util.ComponentUtil;
 import io.vincenzopalazzo.placeholder.util.RoundedCornerBorder;
-
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
@@ -110,11 +109,11 @@ public class BasicTextFieldPlaceholderUI extends BasicPanelUI {
     this.foreground = p.getForeground();
 
     if (this.border == null) {
-      this.border = new BorderUIResource(BorderFactory.createCompoundBorder(
-              new RoundedCornerBorder(this.background, 7),
-              BorderFactory.createEmptyBorder(10,10,10,10)
-      )
-      );
+      this.border =
+          new BorderUIResource(
+              BorderFactory.createCompoundBorder(
+                  new RoundedCornerBorder(this.background, 7),
+                  BorderFactory.createEmptyBorder(10, 10, 10, 10)));
     }
 
     this.colorFocusLine =
@@ -182,7 +181,10 @@ public class BasicTextFieldPlaceholderUI extends BasicPanelUI {
     }
     graphics.setColor(colorLine);
     graphics.fillRect(
-        0, textFieldPlaceholder.getBounds().height - 3, this.textFieldPlaceholder.getBounds().width - 5, 1);
+        0,
+        textFieldPlaceholder.getBounds().height - 3,
+        this.textFieldPlaceholder.getBounds().width - 5,
+        1);
   }
   // getter
   public String getPrefix() {
